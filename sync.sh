@@ -1,6 +1,3 @@
-
-rm ~/.zshrc
-
 chezmoi init bmichalkiewicz/dotfiles
 chezmoi apply -v
 
