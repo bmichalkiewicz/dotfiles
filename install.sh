@@ -1,8 +1,3 @@
-sudo apt-get install -y build-essential procps curl file git unzip
-
-# https://github.com/ohmyzsh/ohmyzsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#install
 bash -c "$(curl --fail --show-error --silent \
     --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
