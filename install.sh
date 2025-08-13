@@ -17,8 +17,4 @@ curl -fsSL https://get.jetify.com/devbox | bash
 bash -c "$(curl --fail --show-error --silent \
     --location https://zyedidia.github.io/eget.sh )"
 
-# https://github.com/hidetatz/kubecolor
-eget hidetatz/kubecolor
-
-# https://github.com/sharkdp/bat
-eget sharkdp/bat
+sudo cp eget /usr/local/bin
