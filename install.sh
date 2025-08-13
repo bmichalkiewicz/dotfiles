@@ -14,10 +14,10 @@ curl -fsSL https://get.jetify.com/devbox | bash
 bash -c "$(curl --fail --show-error --silent \
     --location https://zyedidia.github.io/eget.sh )"
 
-sudo mv eget /usr/local/bin
+mkdir -p ~/.local/bin && mv eget ~/.local/bin/
 
 # https://github.com/hidetatz/kubecolor
-sudo eget hidetatz/kubecolor --to /usr/local/bin
+~/.local/bin/eget hidetatz/kubecolor --to ~/.local/bin
 
 # https://github.com/sharkdp/bat
-sudo eget sharkdp/bat --asset gnu --to /usr/local/bin
+~/.local/bin/eget sharkdp/bat --asset gnu --to ~/.local/bin
