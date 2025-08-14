@@ -67,7 +67,10 @@ alias cat='bat --paging never --theme DarkNeon --style plain'
 alias kubectl='kubecolor'
 
 export KUBECONFIG_DIR="$HOME/.kube/config.d"
-export PATH="$HOME/go/bin:$PATH"
-export PATH=$PATH:/usr/local/go/bin
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Go
+export GOPATH="$HOME/go/packages"
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$HOME/go/bin:$PATH"
