@@ -5,6 +5,9 @@ setopt HIST_IGNORE_ALL_DUPS
 
 source "$HOME/aliases.zsh"
 
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
 # Devbox
 DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
@@ -30,14 +33,13 @@ source <(fzf --zsh)
 # kubecolor
 compdef kubecolor=kubectl
 
-export KUBECONFIG_DIR="$HOME/.kube/config.d"
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
 # Go
 export GOPATH="$HOME/go/packages"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/go/bin:$PATH"
+
+# kubectl-switch
+export KUBECONFIG_DIR="$HOME/.kube/config.d"
 
 # Plugins
 PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
