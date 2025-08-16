@@ -36,7 +36,7 @@ compdef kubecolor=kubectl
 # Go
 export GOPATH="$HOME/go/packages"
 export PATH=$PATH:/usr/local/go/bin
-export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/go/packages/bin:$PATH"
 
 # kubectl-switch
 export KUBECONFIG_DIR="$HOME/.kube/config.d"
