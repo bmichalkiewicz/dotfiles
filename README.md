@@ -1,5 +1,7 @@
 # 1. Install Oh My Zsh
 ```bash
+apt update
+apt install -y curl wget git
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 

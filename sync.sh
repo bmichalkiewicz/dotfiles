@@ -1,8 +1,5 @@
-chezmoi init bmichalkiewicz/dotfiles
-chezmoi update
-chezmoi apply -v
+rm -rf ~/.zshrc
 
-echo "## Follow the instructions at https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions to enable Fira Code in VS Code" \
-    | gum format
+stow .
 
 echo '## Execute `source ~/.zshrc`.' | gum format

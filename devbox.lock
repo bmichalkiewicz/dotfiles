@@ -1,54 +1,6 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "chezmoi@latest": {
-      "last_modified": "2025-08-08T08:05:48Z",
-      "resolved": "github:NixOS/nixpkgs/a3f3e3f2c983e957af6b07a1db98bafd1f87b7a1#chezmoi",
-      "source": "devbox-search",
-      "version": "2.63.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/zbr46cil5qn7r5cfnhraq1wpb7m1jzpg-chezmoi-2.63.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/zbr46cil5qn7r5cfnhraq1wpb7m1jzpg-chezmoi-2.63.1"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/88why9y040pbfszqgxgq7ql308d56x63-chezmoi-2.63.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/88why9y040pbfszqgxgq7ql308d56x63-chezmoi-2.63.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/8cad2jd2vbc14lqppsd6k52lyw1vmrgb-chezmoi-2.63.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/8cad2jd2vbc14lqppsd6k52lyw1vmrgb-chezmoi-2.63.1"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/4zg1pxsj9ppik0nwi5r510zgnsdakapr-chezmoi-2.63.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/4zg1pxsj9ppik0nwi5r510zgnsdakapr-chezmoi-2.63.1"
-        }
-      }
-    },
     "gh@2.50.0": {
       "last_modified": "2024-06-12T20:55:33Z",
       "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#gh",
@@ -410,6 +362,54 @@
             }
           ],
           "store_path": "/nix/store/xiznwi415zwc8ahkiyivaii32vlg80cv-kubectl-1.30.1"
+        }
+      }
+    },
+    "stow@2.4.0": {
+      "last_modified": "2024-10-13T23:44:06Z",
+      "resolved": "github:NixOS/nixpkgs/d4f247e89f6e10120f911e2e2d2254a050d0f732#stow",
+      "source": "devbox-search",
+      "version": "2.4.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/lcql7s3jfb4laqpnvmm07sk59i5lcv7r-stow-2.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/lcql7s3jfb4laqpnvmm07sk59i5lcv7r-stow-2.4.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/dinqdf6018i3r56ljri829nb5gd8k85b-stow-2.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/dinqdf6018i3r56ljri829nb5gd8k85b-stow-2.4.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/r1cm7yppm6ljypvvfhwvj5q09pmfy0kh-stow-2.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/r1cm7yppm6ljypvvfhwvj5q09pmfy0kh-stow-2.4.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fs2wj1q90gdpf74hyybc5dywb2807z1z-stow-2.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/fs2wj1q90gdpf74hyybc5dywb2807z1z-stow-2.4.0"
         }
       }
     },
