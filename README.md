@@ -1,7 +1,7 @@
 # 1. Install Oh My Zsh
 ```bash
-apt update
-apt install -y curl wget git
+sudo apt update
+sudo apt install -y curl wget git zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
@@ -14,7 +14,7 @@ cd ~/dotfiles
 
 # 3. Run setup scripts
 ```bash
-./install.sh
+chmod +x ./install.sh && ./install.sh
 devbox shell
 ./sync.sh
 ```

@@ -32,6 +32,9 @@ TOOLS=(
   "mirceanton/kubectl-switch --asset amd64.tar.gz"
   "junegunn/fzf"
   "neovim/neovim --asset x86_64"
+  "BurntSushi/ripgrep"
+  "sharkdp/fd --asset gnu"
+  "jesseduffield/lazygit"
 )
 for tool in "${TOOLS[@]}"; do
   "$LOCAL_BIN/eget" $tool --to "$LOCAL_BIN"
