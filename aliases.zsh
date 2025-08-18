@@ -16,7 +16,7 @@ alias tree='eza --tree $EZA_PARAMS'
 alias trea='eza --all --tree $EZA_PARAMS'
 
 # cat
-alias cat='bat'
+alias cat='bat --paging never --theme DarkNeon --style plain'
 
 # vim
 alias vim='nvim'

@@ -1,64 +1,51 @@
-autoload -Uz compinit
-compinit
+# Load zsh completion system
+autoload -Uz compinit && compinit
 
-# Oh My Zsh path
+# Oh My Zsh and paths
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
+export GOPATH="$HOME/go/packages"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
 plugins=(
+  git
+  sudo
   helm
   kubectx
   kubectl
-  git
-  sudo
+  fzf
   colored-man-pages
   colorize
   cp
-  fzf
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
-
-setopt HIST_IGNORE_ALL_DUPS
-
-source "$HOME/aliases.zsh"
-
-# Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Prompt
-autoload -U promptinit; promptinit
+# History
+setopt HIST_IGNORE_ALL_DUPS
+
+# Aliases
+source "$HOME/aliases.zsh"
+
+# Prompt (Pure)
 fpath+=($HOME/.zsh/pure)
+autoload -U promptinit && promptinit
 prompt pure
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
 # Devbox
-DEVBOX_NO_PROMPT=true
+export DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
 
-# Completions
+# CLI completions
 source <(devbox completion zsh)
 source <(docker completion zsh)
 source <(kubectl completion zsh)
 source <(kubectl-switch completion zsh)
 
-# Starship
-eval "$(starship init zsh)"
+# Extra tools
+eval $(thefuck --alias)                      # The Fuck
+eval "$(zoxide init --cmd cd zsh)"           # Zoxide
+compdef kubecolor=kubectl                    # Kubecolor
+export KUBECONFIG_DIR="$HOME/.kube/config.d" # Kubectl-switch
 
-# The Fuck
-eval $(thefuck --alias)
-
-# Zoxide
-eval "$(zoxide init --cmd cd zsh)"
-
-# kubecolor
-compdef kubecolor=kubectl
-
-# Go
-export GOPATH="$HOME/go/packages"
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$HOME/go/packages/bin:$PATH"
-
-# kubectl-switch
-export KUBECONFIG_DIR="$HOME/.kube/config.d"
