@@ -1,9 +1,34 @@
 autoload -Uz compinit
 compinit
 
+# Oh My Zsh path
+export ZSH="$HOME/.oh-my-zsh"
+
+plugins=(
+  helm
+  kubectx
+  kubectl
+  git
+  sudo
+  colored-man-pages
+  colorize
+  cp
+  fzf
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
+
 setopt HIST_IGNORE_ALL_DUPS
 
 source "$HOME/aliases.zsh"
+
+# Source Oh My Zsh
+source $ZSH/oh-my-zsh.sh
+
+# Prompt
+autoload -U promptinit; promptinit
+fpath+=($HOME/.zsh/pure)
+prompt pure
 
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -27,9 +52,6 @@ eval $(thefuck --alias)
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
-# fzf
-source <(fzf --zsh)
-
 # kubecolor
 compdef kubecolor=kubectl
 
@@ -40,20 +62,3 @@ export PATH="$HOME/go/packages/bin:$PATH"
 
 # kubectl-switch
 export KUBECONFIG_DIR="$HOME/.kube/config.d"
-
-# Plugins
-PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
-
-# Auto-suggestions
-ZSH_AUTOSUGGEST_STRATEGY=( history completion )
-
-if [[ ! -e "$PLUGIN_DIR/zsh-autosuggestions" ]]; then
-    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git "$PLUGIN_DIR/zsh-autosuggestions"
-fi
-source "$PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-
-# Syntax Highlighting
-if [[ ! -e "$PLUGIN_DIR/zsh-syntax-highlighting" ]]; then
-    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_DIR/zsh-syntax-highlighting"
-fi
-source "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
