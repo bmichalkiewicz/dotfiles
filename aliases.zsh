@@ -40,3 +40,6 @@ alias vim='nvim'
 
 # devbox
 alias ds='devbox shell'
+
+# sudo
+alias please='sudo !!'
