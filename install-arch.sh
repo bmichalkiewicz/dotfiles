@@ -17,10 +17,6 @@ HELM_VERSION="3.18.5"
 
 mkdir -p "$LOCAL_BIN"
 
-pacman-key --init
-pacman-key --populate
-pacman-key --refresh-keys
-pacman -Sy archlinux-keyring
 pacman -Syyu
 sudo pacman -S --needed --noconfirm \
   curl unzip zsh openssh base-devel \
