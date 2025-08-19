@@ -1,3 +1,4 @@
 /kubeconfig.yaml
 /dotfiles
 /.kube/config*
+/.kube/cache
