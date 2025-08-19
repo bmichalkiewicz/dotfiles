@@ -1,6 +1,15 @@
 #!/usr/bin/bash
 set -euo pipefail
 
+passwd root
+useradd -m michab
+passwd michab
+
+pacman -Sy sudo
+chmod 600 /etc/sudoers
+sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers
+usermod -aG wheel michab
+
 # Constants
 LOCAL_BIN="$HOME/.local/bin"
 GO_VERSION="1.24.6"
@@ -14,7 +23,7 @@ pacman-key --refresh-keys
 pacman -Sy archlinux-keyring
 pacman -Syyu
 sudo pacman -S --needed --no-confirm \
-  build-essential curl unzip zsh openssh base-devel \
+  curl unzip zsh openssh base-devel \
   go-task go
 
 # yay
