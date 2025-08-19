@@ -2,12 +2,19 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
   "packages": [
     "gh@2.54.0",
-    "starship@1.23.0",
+    "go@1.24.5",
     "bat@latest",
     "zoxide@latest",
     "fzf@latest",
     "eza@latest",
-    "thefuck@latest"
+    "thefuck@latest",
+    "terraform@latest",
+    "packer@latest",
+    "kubectl@latest",
+    "yq-go@latest",
+    "jq@latest",
+    "fd@latest",
+    "ripgrep@latest"
   ],
   "shell": {
     "init_hook": [],

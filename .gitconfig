@@ -1,12 +1,12 @@
 [user]
-    name = bmichalkiewicz
-    email = bartosz.michalkiewicz@outlook.com
+  name = bmichalkiewicz
+  email = bartosz.michalkiewicz@outlook.com
 
 [pull]
-    rebase = true
+  rebase = true
 
 [push]
-    autoSetupRemote = true
+  autoSetupRemote = true
 
 [rebase]
-    autoStash = true
+  autoStash = true

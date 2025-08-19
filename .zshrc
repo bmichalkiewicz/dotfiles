@@ -43,9 +43,12 @@ source <(docker completion zsh)
 source <(kubectl completion zsh)
 source <(kubectl-switch completion zsh)
 
-# Extra tools
-eval $(thefuck --alias)                      # The Fuck
-eval "$(zoxide init --cmd cd zsh)"           # Zoxide
-compdef kubecolor=kubectl                    # Kubecolor
-export KUBECONFIG_DIR="$HOME/.kube/config.d" # Kubectl-switch
+# Autosuggest settings
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Extra tools
+eval $(thefuck --alias)  # The Fuck
+eval "$(zoxide init --cmd cd zsh)"                          # Zoxide
+export KUBECONFIG_DIR="$HOME/.kube/config.d"                # Kubectl-switch
+compdef kubecolor=kubectl                                   # Kubecolor
