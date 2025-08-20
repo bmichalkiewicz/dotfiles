@@ -22,9 +22,10 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 |
 # eget
 curl https://zyedidia.github.io/eget.sh | sh
 TOOLS=(
-  "go-task/task --asset amd64.tar.gz --to $LOCAL_BIN "
+  "go-task/task --asset amd64.tar.gz --to $LOCAL_BIN"
   "mirceanton/kubectl-switch --asset amd64.tar.gz --to $LOCAL_BIN"
   "neovim/neovim --asset x86_64 --to $LOCAL_BIN/nvim"
+  "jesseduffield/lazygit --to $LOCAL_BIN"
 )
 
 for tool in "${TOOLS[@]}"; do
