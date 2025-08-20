@@ -34,6 +34,8 @@ alias gch='git checkout'
 
 # kubectl
 alias k='kubecolor'
+alias kns='kubectl-switch ns'
+alias kctx='kubectl-switch ctx'
 
 # vim
 alias vim='nvim'
