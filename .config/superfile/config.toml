@@ -1,5 +1,3 @@
-[style]
-transparent_background = true
 theme = 'catppuccin'
 #
 # The editor files will be opened with. (Leave blank to use the EDITOR environment variable).
