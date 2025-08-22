@@ -19,6 +19,7 @@ plugins=(
   cp
   zsh-syntax-highlighting
   zsh-autosuggestions
+  aws
 )
 source $ZSH/oh-my-zsh.sh
 
