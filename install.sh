@@ -55,8 +55,8 @@ $LOCAL_BIN/uv tool install ansible-core --with ansible
 $LOCAL_BIN/uv tool install gita
 
 # gita
-mkdir -p "$HOME/.zsh/completions" &&
-  curl -o "$HOME/.zsh/completions/gita" https://raw.githubusercontent.com/nosarthur/gita/refs/heads/master/auto-completion/zsh/_gita
+mkdir -p "$HOME/.zsh/completions/gita" &&
+  curl -o "$HOME/.zsh/completions/gita/_gita" https://raw.githubusercontent.com/nosarthur/gita/refs/heads/master/auto-completion/zsh/_gita
 
 # Add the repository to Apt sources:
 echo \
