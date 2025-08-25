@@ -28,6 +28,7 @@ TOOLS=(
   "jesseduffield/lazygit --to $LOCAL_BIN"
   "jesseduffield/lazydocker --to $LOCAL_BIN"
   "bmichalkiewicz/gloner --to $LOCAL_BIN"
+  "astral-sh/uv --asset gnu --to $LOCAL_BIN"
 )
 
 for tool in "${TOOLS[@]}"; do
@@ -48,6 +49,14 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install --update
 rm -rf ./aws awscliv2.zip
+
+# uv
+$LOCAL_BIN/uv tool install ansible-core --with ansible
+$LOCAL_BIN/uv tool install gita
+
+# gita
+mkdir -p "$HOME/.zsh/completions" &&
+  curl -o "$HOME/.zsh/completions/gita" https://raw.githubusercontent.com/nosarthur/gita/refs/heads/master/auto-completion/zsh/_gita
 
 # Add the repository to Apt sources:
 echo \
