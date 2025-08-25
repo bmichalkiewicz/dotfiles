@@ -32,13 +32,14 @@ source "$HOME/aliases.zsh"
 
 # Prompt (Pure)
 fpath+=($HOME/.zsh/pure)
-autoload -U promptinit && promptinit
-prompt pure
 
 # Gita completion
 if [[ -d "$HOME/.zsh/completions/gita" ]]; then
   fpath+=($HOME/.zsh/completions/gita)
 fi
+
+autoload -U promptinit && promptinit
+prompt pure
 
 # Devbox
 export DEVBOX_NO_PROMPT=true
