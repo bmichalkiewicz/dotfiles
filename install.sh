@@ -46,7 +46,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 # AWS cli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
-sudo ./aws/install
+sudo ./aws/install --update
 rm -rf ./aws awscliv2.zip
 
 # Add the repository to Apt sources:
