@@ -4,6 +4,8 @@ autoload -Uz compinit && compinit
 # Oh My Zsh and paths
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
+export GIT_PATH="$HOME/git"
+# Golang
 export GOPATH="$HOME/go/packages"
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
@@ -14,7 +16,6 @@ plugins=(
   kubectx
   kubectl
   fzf
-  colored-man-pages
   colorize
   cp
   zsh-syntax-highlighting
@@ -49,7 +50,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Extra tools
-eval $(thefuck --alias)  # The Fuck
 eval "$(zoxide init --cmd cd zsh)"                          # Zoxide
 export KUBECONFIG_DIR="$HOME/.kube/config.d"                # Kubectl-switch
 compdef kubecolor=kubectl                                   # Kubecolor

@@ -27,6 +27,7 @@ TOOLS=(
   "neovim/neovim --asset x86_64 --to $LOCAL_BIN/nvim"
   "jesseduffield/lazygit --to $LOCAL_BIN"
   "jesseduffield/lazydocker --to $LOCAL_BIN"
+  "bmichalkiewicz/gloner --to $LOCAL_BIN"
 )
 
 for tool in "${TOOLS[@]}"; do
@@ -76,6 +77,6 @@ fi
 if [[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
   git -C "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" pull
 else
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+  w git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi

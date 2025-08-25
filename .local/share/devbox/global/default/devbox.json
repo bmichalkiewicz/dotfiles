@@ -7,7 +7,6 @@
     "zoxide@latest",
     "fzf@latest",
     "eza@latest",
-    "thefuck@latest",
     "terraform@latest",
     "packer@latest",
     "kubectl@latest",
