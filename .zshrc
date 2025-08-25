@@ -35,6 +35,11 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit && promptinit
 prompt pure
 
+# Gita completion
+if [[ -d "$HOME/.zsh/completions/gita" ]]; then
+  fpath+=($HOME/.zsh/completions/gita)
+fi
+
 # Devbox
 export DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
@@ -54,3 +59,25 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 eval "$(zoxide init --cmd cd zsh)"                          # Zoxide
 export KUBECONFIG_DIR="$HOME/.kube/config.d"                # Kubectl-switch
 compdef kubecolor=kubectl                                   # Kubecolor
+
+# spf
+spf() {
+  os=$(uname -s)
+
+  # Linux
+  if [[ "$os" == "Linux" ]]; then
+      export SPF_LAST_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/superfile/lastdir"
+  fi
+
+  # macOS
+  if [[ "$os" == "Darwin" ]]; then
+      export SPF_LAST_DIR="$HOME/Library/Application Support/superfile/lastdir"
+  fi
+
+  command spf "$@"
+
+  [ ! -f "$SPF_LAST_DIR" ] || {
+      . "$SPF_LAST_DIR"
+      rm -f -- "$SPF_LAST_DIR" > /dev/null
+  }
+}
