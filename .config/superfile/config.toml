@@ -13,7 +13,7 @@ dir_editor = ""
 auto_check_update = true
 # 
 # Cd on quit (For more details, please check out https://superfile.netlify.app/configure/superfile-config/#cd_on_quit)
-cd_on_quit = false
+cd_on_quit = true
 #
 # Whether to open file preview automatically every time superfile is opened.
 default_open_file_preview = true
@@ -52,7 +52,7 @@ ignore_missing_fields = false
 # ================   Style =================
 #
 # Whether to use the builtin syntax highlighting with chroma or use bat. Values: "" for builtin chroma, "bat" for bat
-code_previewer = ''
+code_previewer = 'bat'
 # 
 # If you don't have or don't want Nerdfont installed you can turn this off
 nerdfont = true

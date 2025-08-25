@@ -64,6 +64,11 @@ if [[ ! -d "$HOME/.zsh/pure" ]]; then
   git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 
+# K9s theme
+OUT="${XDG_CONFIG_HOME:-$HOME/.config}/k9s/skins"
+mkdir -p "$OUT"
+curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist
+
 # ZSH Plugins
 # zsh-autosuggestions
 if [[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]]; then

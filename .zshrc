@@ -44,6 +44,7 @@ source <(devbox completion zsh)
 source <(docker completion zsh)
 source <(kubectl completion zsh)
 source <(kubectl-switch completion zsh)
+source <(k9s completion zsh)
 
 # Autosuggest settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
