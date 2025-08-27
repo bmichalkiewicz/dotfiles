@@ -10,8 +10,8 @@ mkdir -p "$LOCAL_BIN"
 
 sudo apt-get update
 sudo apt-get install -y \
-  build-essential procps curl file git unzip zsh fuse \
-  gpg wget lsb-release
+	build-essential procps curl file git unzip zsh fuse \
+	gpg wget lsb-release
 
 # https://www.jetify.com/devbox/docs/installing_devbox/
 curl -fsSL https://get.jetify.com/devbox | bash
@@ -22,17 +22,17 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 |
 # eget
 curl https://zyedidia.github.io/eget.sh | sh
 TOOLS=(
-  "go-task/task --asset amd64.tar.gz --to $LOCAL_BIN"
-  "mirceanton/kubectl-switch --asset amd64.tar.gz --to $LOCAL_BIN"
-  "neovim/neovim --asset x86_64 --to $LOCAL_BIN/nvim"
-  "jesseduffield/lazygit --to $LOCAL_BIN"
-  "jesseduffield/lazydocker --to $LOCAL_BIN"
-  "bmichalkiewicz/gloner --to $LOCAL_BIN"
-  "astral-sh/uv --asset gnu --to $LOCAL_BIN"
+	"go-task/task --asset amd64.tar.gz --to $LOCAL_BIN"
+	"mirceanton/kubectl-switch --asset amd64.tar.gz --to $LOCAL_BIN"
+	"neovim/neovim --asset x86_64 --to $LOCAL_BIN/nvim"
+	"jesseduffield/lazygit --to $LOCAL_BIN"
+	"jesseduffield/lazydocker --to $LOCAL_BIN"
+	"bmichalkiewicz/gloner --to $LOCAL_BIN"
+	"astral-sh/uv --asset gnu --to $LOCAL_BIN"
 )
 
 for tool in "${TOOLS[@]}"; do
-  "./eget" $tool
+	"./eget" $tool
 done
 rm -rf eget
 
@@ -54,15 +54,21 @@ rm -rf ./aws awscliv2.zip
 $LOCAL_BIN/uv tool install ansible-core --with ansible
 $LOCAL_BIN/uv tool install gita
 
+# Volta
+curl https://get.volta.sh | bash
+
+# Claude
+curl -fsSL claude.ai/install.sh | bash
+
 # gita
 mkdir -p "$HOME/.zsh/completions/gita" &&
-  curl -o "$HOME/.zsh/completions/gita/_gita" https://raw.githubusercontent.com/nosarthur/gita/refs/heads/master/auto-completion/zsh/_gita
+curl -o "$HOME/.zsh/completions/gita/_gita" https://raw.githubusercontent.com/nosarthur/gita/refs/heads/master/auto-completion/zsh/_gita
 
 # Add the repository to Apt sources:
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-  sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -70,7 +76,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ### ZSH
 # Pure theme
 if [[ ! -d "$HOME/.zsh/pure" ]]; then
-  git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 
 # K9s theme
@@ -81,16 +87,16 @@ curl -L https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT"
 # ZSH Plugins
 # zsh-autosuggestions
 if [[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]]; then
-  git -C "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" pull
+	git -C "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" pull
 else
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-autosuggestions.git \
+		${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 # zsh-syntax-highlighting
 if [[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
-  git -C "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" pull
+	git -C "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" pull
 else
-  w git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	w git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+		${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi

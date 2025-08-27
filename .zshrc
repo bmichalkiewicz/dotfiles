@@ -3,8 +3,10 @@ autoload -Uz compinit && compinit
 
 # Oh My Zsh and paths
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
+export VOLTA_HOME="$HOME/.volta"
 export GIT_PATH="$HOME/git"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 # Golang
 export GOPATH="$HOME/go/packages"
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
