@@ -11,6 +11,8 @@ export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/go/packages"
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
+. "$HOME/.cargo/env"
+
 plugins=(
   git
   sudo

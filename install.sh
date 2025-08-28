@@ -57,6 +57,9 @@ $LOCAL_BIN/uv tool install gita
 # Volta
 curl https://get.volta.sh | bash
 
+# Cargo
+curl https://sh.rustup.rs -sSf | sh
+
 # Claude
 curl -fsSL claude.ai/install.sh | bash
 
