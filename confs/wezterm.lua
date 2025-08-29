@@ -3,8 +3,18 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
-local is_windows = os.getenv("OS") == "Windows_NT"
-local is_macos = os.getenv("OS") == "Darwin"
+-- Platform detection
+local function get_os()
+  local handle = io.popen("uname -s")
+  local result = handle:read("*a"):gsub("%s+", "")
+  handle:close()
+  return result
+end
+
+local os_name = get_os()
+local is_windows = os_name == "MINGW64_NT" or os.getenv("OS") == "Windows_NT"
+local is_macos = os_name == "Darwin"
+local is_linux = os_name == "Linux"
 
 -- Font Configuration
 config.font = wezterm.font_with_fallback({
@@ -41,16 +51,21 @@ end
 -- Performance Settings
 config.max_fps = 144
 config.animation_fps = 144
+config.scrollback_lines = 10000
+config.enable_scroll_bar = false
 
 -- Tab Bar Configuration
 config.use_fancy_tab_bar = false
 config.tab_max_width = 1600
 
 config.status_update_interval = 1000
+
+-- Cache basename function for performance
+local function basename(s)
+  return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
 wezterm.on("update-status", function(window, pane)
-	local basename = function(s)
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	end
 
 	-- Current working directory
 	local cwd = pane:get_current_working_dir()
@@ -71,14 +86,17 @@ wezterm.on("update-status", function(window, pane)
 	-- Time
 	local time = wezterm.strftime("%H:%M")
 
-	-- Right status
+	-- Right status with custom colors
 	window:set_right_status(wezterm.format({
+		{ Foreground = { Color = "#8aadf4" } },
 		{ Text = wezterm.nerdfonts.md_folder .. "  " .. cwd },
+		{ Foreground = { Color = "#6e738d" } },
 		{ Text = " | " },
-		{ Foreground = { Color = "#e0af68" } },
+		{ Foreground = { Color = "#f5a97f" } },
 		{ Text = wezterm.nerdfonts.fa_code .. "  " .. cmd },
-		"ResetAttributes",
+		{ Foreground = { Color = "#6e738d" } },
 		{ Text = " | " },
+		{ Foreground = { Color = "#a6da95" } },
 		{ Text = wezterm.nerdfonts.md_clock .. "  " .. time },
 		{ Text = "  " },
 	}))
@@ -87,24 +105,39 @@ end)
 
 -- Keybindings
 config.disable_default_key_bindings = true
+
+-- Helper function to generate tab activation keys
+local function generate_tab_keys()
+  local keys = {}
+  for i = 1, 9 do
+    table.insert(keys, {
+      key = tostring(i),
+      mods = "ALT",
+      action = act.ActivateTab(i - 1)
+    })
+  end
+  return keys
+end
+
 config.keys = {
 	-- Clipboard
 	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
 	{ key = "v", mods = "ALT|CTRL", action = act.PasteFrom("Clipboard") },
+	
+	-- Search and Copy Mode
+	{ key = "f", mods = "CTRL|SHIFT", action = act.Search({ CaseInSensitiveString = "" }) },
+	{ key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+	{ key = "u", mods = "CTRL|SHIFT", action = act.QuickSelect },
+	
+	-- Font Size
+	{ key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+	{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+	{ key = "0", mods = "CTRL", action = act.ResetFontSize },
 	-- Tabs
 	{ key = "t", mods = "ALT", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "w", mods = "ALT", action = act.CloseCurrentTab({ confirm = false }) },
 	{ key = "[", mods = "ALT", action = act.ActivateTabRelative(1) },
 	{ key = "]", mods = "ALT", action = act.ActivateTabRelative(-1) },
-	{ key = "1", mods = "ALT", action = act.ActivateTab(0) },
-	{ key = "2", mods = "ALT", action = act.ActivateTab(1) },
-	{ key = "3", mods = "ALT", action = act.ActivateTab(2) },
-	{ key = "4", mods = "ALT", action = act.ActivateTab(3) },
-	{ key = "5", mods = "ALT", action = act.ActivateTab(4) },
-	{ key = "6", mods = "ALT", action = act.ActivateTab(5) },
-	{ key = "7", mods = "ALT", action = act.ActivateTab(6) },
-	{ key = "8", mods = "ALT", action = act.ActivateTab(7) },
-	{ key = "9", mods = "ALT", action = act.ActivateTab(8) },
 	-- Panes
 	{ key = "-", mods = "ALT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "=", mods = "ALT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
@@ -115,20 +148,29 @@ config.keys = {
 	{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
 	{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
-	{ key = "h", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Left", 1 }) },
-	{ key = "j", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Down", 1 }) },
-	{ key = "k", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Up", 1 }) },
-	{ key = "l", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "h", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Left", 3 }) },
+	{ key = "j", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Down", 3 }) },
+	{ key = "k", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Up", 3 }) },
+	{ key = "l", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Right", 3 }) },
 	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
 	{ key = "DownArrow", mods = "ALT", action = act.ActivatePaneDirection("Down") },
 	{ key = "UpArrow", mods = "ALT", action = act.ActivatePaneDirection("Up") },
 	{ key = "RightArrow", mods = "ALT", action = act.ActivatePaneDirection("Right") },
-	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Left", 1 }) },
-	{ key = "DownArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Down", 1 }) },
-	{ key = "UpArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Up", 1 }) },
-	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Right", 1 }) }
+	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Left", 3 }) },
+	{ key = "DownArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Down", 3 }) },
+	{ key = "UpArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Up", 3 }) },
+	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.AdjustPaneSize({ "Right", 3 }) },
+	
+	-- Workspace management
+	{ key = "w", mods = "CTRL|SHIFT", action = act.ShowLauncherArgs({ flags = "WORKSPACES" }) },
 }
 
+-- Add generated tab keys
+for _, key in ipairs(generate_tab_keys()) do
+  table.insert(config.keys, key)
+end
+
+-- Platform-specific configuration
 if is_windows then
   config.wsl_domains = {
     {
@@ -138,6 +180,11 @@ if is_windows then
     },
   }
   config.default_domain = "WSL:Debian"
+elseif is_macos then
+  config.send_composed_key_when_left_alt_is_pressed = false
+  config.send_composed_key_when_right_alt_is_pressed = false
+elseif is_linux then
+  config.enable_wayland = true
 end
 
 return config

@@ -1,17 +1,27 @@
-# Load zsh completion system
-autoload -Uz compinit && compinit
-
-# Oh My Zsh and paths
+# Environment Variables
 export ZSH="$HOME/.oh-my-zsh"
 export VOLTA_HOME="$HOME/.volta"
 export GIT_PATH="$HOME/git"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH="/usr/local/bin:$HOME/.local/bin:$PATH"
-# Golang
 export GOPATH="$HOME/go/packages"
-export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+export DEVBOX_NO_PROMPT=true
+export KUBECONFIG_DIR="$HOME/.kube/config.d"
 
-. "$HOME/.cargo/env"
+# Path Configuration
+path=(
+  $VOLTA_HOME/bin
+  /usr/local/bin
+  $HOME/.local/bin
+  /usr/local/go/bin
+  $GOPATH/bin
+  $path
+)
+export PATH
+
+# Load Cargo environment if it exists
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+# Load zsh completion system
+autoload -Uz compinit && compinit
 
 plugins=(
   git
@@ -28,8 +38,14 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-# History
+# History Configuration
 setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt SHARE_HISTORY
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Aliases
 source "$HOME/aliases.zsh"
@@ -46,43 +62,47 @@ autoload -U promptinit && promptinit
 prompt pure
 
 # Devbox
-export DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
 
-# CLI completions
-source <(devbox completion zsh)
-source <(docker completion zsh)
-source <(kubectl completion zsh)
-source <(kubectl-switch completion zsh)
-source <(k9s completion zsh)
+# Lazy load completions function
+_load_completion() {
+  local cmd="$1"
+  local comp_cmd="$2"
+  if command -v "$cmd" &> /dev/null; then
+    source <(eval "$comp_cmd")
+  fi
+}
+
+# CLI completions with error checking
+_load_completion devbox "devbox completion zsh"
+_load_completion docker "docker completion zsh"
+_load_completion kubectl "kubectl completion zsh"
+_load_completion kubectl-switch "kubectl-switch completion zsh"
+_load_completion k9s "k9s completion zsh"
 
 # Autosuggest settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-# Extra tools
-eval "$(zoxide init --cmd cd zsh)"                          # Zoxide
-export KUBECONFIG_DIR="$HOME/.kube/config.d"                # Kubectl-switch
-compdef kubecolor=kubectl                                   # Kubecolor
+# Extra tools with error checking
+command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
+command -v kubecolor &> /dev/null && compdef kubecolor=kubectl
 
-# spf
-spf() {
-  os=$(uname -s)
-
-  # Linux
-  if [[ "$os" == "Linux" ]]; then
-      export SPF_LAST_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/superfile/lastdir"
-  fi
-
-  # macOS
-  if [[ "$os" == "Darwin" ]]; then
-      export SPF_LAST_DIR="$HOME/Library/Application Support/superfile/lastdir"
-  fi
-
-  command spf "$@"
-
-  [ ! -f "$SPF_LAST_DIR" ] || {
-      . "$SPF_LAST_DIR"
-      rm -f -- "$SPF_LAST_DIR" > /dev/null
+# Superfile with directory tracking
+if command -v spf &> /dev/null; then
+  spf() {
+    local spf_last_dir
+    case "$(uname -s)" in
+      Linux)  spf_last_dir="${XDG_STATE_HOME:-$HOME/.local/state}/superfile/lastdir" ;;
+      Darwin) spf_last_dir="$HOME/Library/Application Support/superfile/lastdir" ;;
+      *) command spf "$@"; return ;;
+    esac
+    
+    command spf "$@"
+    
+    [[ -f "$spf_last_dir" ]] && {
+      . "$spf_last_dir"
+      rm -f "$spf_last_dir" 2>/dev/null
+    }
   }
-}
+fi

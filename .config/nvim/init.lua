@@ -44,7 +44,6 @@ now(function()
   vim.o.spelloptions = "camel"
   vim.opt.complete:append("kspell")
   vim.o.path = vim.o.path .. ",**"
-  vim.o.tags = vim.o.tags .. ",/home/michab/.config/nvim/tags"
   -- don't save blank buffers to sessions (like neo-tree, trouble etc.)
   vim.opt.sessionoptions:remove('blank')
 end)
@@ -185,6 +184,7 @@ later(function()
 end)
 later(function() require('mini.colors').setup() end)
 later(function() require("mini.comment").setup() end)
+-- blink.cmp is a bit faster and doesn't laggy when fallback
 -- later(function()
 --   require("mini.completion").setup({
 --     mappings = {
@@ -289,9 +289,6 @@ later(function()
   end, { desc = "Toggle Password Cloaking" })
 end)
 
--- Disabled as we use randomhue
--- Enable this for a modus Operandi inspired Colorscheme
---
 later(function()
   vim.cmd("colorscheme miniautumn")
 end)
@@ -341,7 +338,6 @@ later(function()
   require("mini.misc").setup({ make_global = { "put", "put_text", "stat_summary", "bench_time" } })
   MiniMisc.setup_auto_root()
   MiniMisc.setup_restore_cursor()
-  MiniMisc.setup_termbg_sync()
 end)
 later(function()
   require("mini.move").setup({
@@ -416,11 +412,7 @@ later(function()
   local gen_loader = require('mini.snippets').gen_loader
   require('mini.snippets').setup({
     snippets = {
-      -- Load custom file with global snippets first (adjust for Windows)
       gen_loader.from_file('~/.config/nvim/snippets/global.json'),
-
-      -- Load snippets based on current language by reading files from
-      -- "snippets/" subdirectories from 'runtimepath' directories.
       gen_loader.from_lang(),
     },
   })
@@ -437,7 +429,6 @@ now(function()
   require("mini.starter").setup({
     autoopen = true,
     items = {
-      -- require("mini.starter").sections.builtin_actions(),
       Mvim_starter_custom(),
       require("mini.starter").sections.recent_files(5, false, false),
       require("mini.starter").sections.recent_files(5, true, false),
@@ -494,9 +485,10 @@ later(function() require("mini.visits").setup() end)
 require("filetypes")
 require("highlights")
 require("keybinds")
+-- require("3rdplugins")
 
--- If you want to add additional personal Plugins
--- add lua/personal.lua as a file and configure what ever you need
+
+-- Personal configuration (excluded in .gitignore)
 local path_modules = vim.fn.stdpath("config") .. "/lua/"
 if vim.uv.fs_stat(path_modules .. "personal.lua") then
   require("personal")
