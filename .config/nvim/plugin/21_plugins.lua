@@ -165,13 +165,12 @@ later(function() -- lsp
 
   vim.lsp.enable({
     "gopls",
+    "bashls",
+    "ansiblels",
     "lua_ls",
     "basedpyright",
     "marksman",
-    "ruff",
-    "harper_ls",
     "helm_ls",
-    "rust_analyzer",
     "jsonls",
     "yamlls",
   })

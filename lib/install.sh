@@ -6,12 +6,51 @@ LOCAL_BIN="$HOME/.local/bin"
 GO_VERSION="1.24.6"
 HELM_VERSION="3.18.5"
 
+# OS detection
+detect_os() {
+    if [[ -f /etc/os-release ]]; then
+        . /etc/os-release
+        OS=$NAME
+        OS_ID=$ID
+    elif type lsb_release >/dev/null 2>&1; then
+        OS=$(lsb_release -si)
+        OS_ID=$(lsb_release -si | tr '[:upper:]' '[:lower:]')
+    else
+        OS=$(uname -s)
+        OS_ID=$(uname -s | tr '[:upper:]' '[:lower:]')
+    fi
+}
+
+# Package manager wrapper
+install_packages() {
+    detect_os
+    case $OS_ID in
+        arch|manjaro)
+            sudo pacman -S --needed --noconfirm "$@"
+            ;;
+        ubuntu|debian|pop)
+            sudo apt-get update
+            sudo apt-get install -y "$@"
+            ;;
+        *)
+            echo "❌ Unsupported OS: $OS"
+            exit 1
+            ;;
+    esac
+}
+
 install_system_packages() {
     echo "📦 Installing system packages..."
-    sudo apt-get update
-    sudo apt-get install -y \
-        build-essential procps curl file git unzip zsh fuse \
-        gpg wget lsb-release ca-certificates
+    detect_os
+    case $OS_ID in
+        arch|manjaro)
+            install_packages curl git unzip
+            ;;
+        ubuntu|debian|pop)
+            install_packages build-essential procps curl file git unzip zsh fuse \
+                gpg wget lsb-release ca-certificates
+            ;;
+    esac
 }
 
 install_devbox() {
@@ -49,19 +88,29 @@ install_helm() {
 
 install_docker() {
     echo "🐳 Installing Docker..."
-    # Add Docker's official GPG key
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    detect_os
+    case $OS_ID in
+        arch|manjaro)
+            install_packages docker docker-compose
+            sudo systemctl enable docker.service
+            sudo systemctl enable containerd.service
+            ;;
+        ubuntu|debian|pop)
+            # Add Docker's official GPG key
+            sudo install -m 0755 -d /etc/apt/keyrings
+            sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+            sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-    # Add the repository to Apt sources
-    echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-        sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+            # Add the repository to Apt sources
+            echo \
+                "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+              $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+                sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            sudo apt-get update
+            sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            ;;
+    esac
 }
 
 install_aws_cli() {
