@@ -20,15 +20,12 @@ now_if_args(function() -- treesitter
     "go",
     "helm",
     "html",
-    "javascript",
     "json",
     "lua",
     "markdown",
     "markdown_inline",
     "python",
     "regex",
-    "rust",
-    "sql",
     "toml",
     "yaml",
   }
@@ -100,10 +97,7 @@ later(function() -- mason
       "lua_ls",
       "basedpyright",
       "marksman",
-      "ruff",
-      "harper_ls",
       "helm_ls",
-      "rust_analyzer",
       "jsonls",
       "yamlls",
     },
@@ -125,11 +119,9 @@ later(function() -- conform
     formatters_by_ft = {
       css        = { "prettierd" },
       html       = { "prettierd" },
-      javascript = { "prettierd" },
       json       = { "prettier" },
       lua        = { "stylua" },
       markdown   = { "prettierd" },
-      sql        = { "sqruff" },
       go         = { "gofmt" },
     },
   })
@@ -248,7 +240,6 @@ later(function() -- nvim-lint
   local lint = require("lint")
   lint.linters_by_ft = {
     markdown = { "markdownlint-cli2" },
-    sql = { "sqruff" },
     sh = { "shellcheck" },
   }
 

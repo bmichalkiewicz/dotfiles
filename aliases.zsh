@@ -45,3 +45,6 @@ alias ds='devbox shell'
 
 # sudo
 alias please='sudo !!'
+
+# argocd
+alias ac="argo-cd"

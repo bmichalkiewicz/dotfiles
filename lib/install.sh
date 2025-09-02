@@ -73,6 +73,8 @@ install_tools() {
         "jesseduffield/lazydocker --to $LOCAL_BIN"
         "bmichalkiewicz/gloner --to $LOCAL_BIN"
         "astral-sh/uv --asset gnu --to $LOCAL_BIN"
+        "argoproj/argo-cd --to $LOCAL_BIN"
+        "koalaman/shellcheck --too $LOCAL_BIN"
     )
 
     for tool in "${tools[@]}"; do
@@ -130,6 +132,7 @@ install_python_tools() {
 install_volta() {
     echo "⚡ Installing Volta..."
     curl https://get.volta.sh | bash
+    volta install node
 }
 
 install_rust() {
