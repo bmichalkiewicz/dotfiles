@@ -88,7 +88,7 @@ Language servers are configured via individual files in the `lsp/` directory and
 ### Colorscheme Configuration
 
 Two colorschemes are configured with extensive highlight overrides:
-- **mellow** (currently active): A warm, low-contrast theme
+- **gruvbox** (currently active): A retro groove color scheme with warm earth tones
 - **catppuccin**: Popular pastel theme with mocha and macchiato variants
 
 Both colorschemes include custom highlights for mini.nvim components and consistent TODO/FIXME/HACK/NOTE highlighting.

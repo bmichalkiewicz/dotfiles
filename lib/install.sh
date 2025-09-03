@@ -75,6 +75,7 @@ install_tools() {
         "astral-sh/uv --asset gnu --to $LOCAL_BIN"
         "argoproj/argo-cd --to $LOCAL_BIN"
         "koalaman/shellcheck --to $LOCAL_BIN"
+        "tree-sitter/tree-sitter --to $LOCAL_BIN"
     )
 
     for tool in "${tools[@]}"; do

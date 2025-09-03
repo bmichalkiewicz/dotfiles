@@ -283,60 +283,78 @@ now_if_args(function() -- vim-helm
   add("towolf/vim-helm")
 end)
 
--- Colorschemes
-now(function() -- mellow
-  add("mellow-theme/mellow.nvim")
-  local c = require("mellow.colors").dark
+-- Colorschemes  
+now(function() -- gruvbox
+  add("ellisonleao/gruvbox.nvim")
+  
+  require("gruvbox").setup({
+    terminal_colors = true,
+    undercurl = true,
+    underline = true,
+    bold = true,
+    italic = {
+      strings = true,
+      emphasis = true,
+      comments = true,
+      operators = false,
+      folds = true,
+    },
+    strikethrough = true,
+    invert_selection = false,
+    invert_signs = false,
+    invert_tabline = false,
+    invert_intend_guides = false,
+    inverse = true,
+    contrast = "", -- can be "hard", "soft" or empty string
+    palette_overrides = {},
+    overrides = {
+      MiniHipatternsFixmeBody = { fg = "#fb4934" },
+      MiniHipatternsFixme = { fg = "#1d2021", bg = "#fb4934" },
+      MiniHipatternsFixmeColon = { bg = "#fb4934", fg = "#fb4934", bold = true },
 
-  vim.g.mellow_italic_keywords = true
-  vim.g.mellow_bold_functions = true
+      MiniHipatternsHackBody = { fg = "#fe8019" },
+      MiniHipatternsHack = { fg = "#1d2021", bg = "#fe8019" },
+      MiniHipatternsHackColon = { bg = "#fe8019", fg = "#fe8019", bold = true },
 
-  vim.g.mellow_highlight_overrides = {
-    Delimiter = { fg = c.gray03 },
+      MiniHipatternsNoteBody = { fg = "#fabd2f" },
+      MiniHipatternsNote = { fg = "#1d2021", bg = "#fabd2f" },
+      MiniHipatternsNoteColon = { bg = "#fabd2f", fg = "#fabd2f", bold = true },
 
-    MiniHipatternsFixmeBody = { fg = c.cyan },
-    MiniHipatternsFixme = { fg = c.bg, bg = c.cyan },
-    MiniHipatternsFixmeColon = { bg = c.cyan, fg = c.cyan, bold = true },
+      MiniHipatternsTodoBody = { fg = "#83a598" },
+      MiniHipatternsTodo = { fg = "#1d2021", bg = "#83a598" },
+      MiniHipatternsTodoColon = { bg = "#83a598", fg = "#83a598", bold = true },
 
-    MiniHipatternsHackBody = { fg = c.red },
-    MiniHipatternsHack = { fg = c.bg, bg = c.red },
-    MiniHipatternsHackColon = { bg = c.red, fg = c.red, bold = true },
+      MiniJump = { sp = "#fabd2f", undercurl = true },
 
-    MiniHipatternsNoteBody = { fg = c.yellow },
-    MiniHipatternsNote = { fg = c.bg, bg = c.yellow },
-    MiniHipatternsNoteColon = { bg = c.yellow, fg = c.yellow, bold = true },
+      MiniStatuslineDirectory = { fg = "#928374" },
+      MiniStatuslineFilenameModified = { fg = "#fb4934", bold = true },
 
-    MiniHipatternsTodoBody = { fg = c.blue },
-    MiniHipatternsTodo = { fg = c.bg, bg = c.blue },
-    MiniHipatternsTodoColon = { bg = c.blue, fg = c.blue, bold = true },
+      NormalNC = { link = "Normal" },
 
-    MiniJump = { sp = c.yellow, undercurl = true },
+      RenderMarkdownBullet = { fg = "#8ec07c" },
+      RenderMarkdownCodeBorder = { bg = "#1d2021" },
+      RenderMarkdownTableHead = { fg = "#928374" },
+      RenderMarkdownTableRow = { fg = "#928374" },
 
-    MiniStatuslineDirectory = { fg = c.gray05 },
-    MiniStatuslineFilenameModified = { fg = c.red, bold = true },
+      Search = { sp = "#fabd2f", underdouble = true },
 
-    NormalNC = { link = "Normal" },
+      ["@markup.heading"] = { fg = "#8ec07c", bold = true },
+      ["@markup.heading.1"] = { italic = false },
+      ["@markup.heading.2"] = { italic = false },
+      ["@markup.heading.3"] = { italic = false },
+      ["@markup.heading.4"] = { italic = false },
+      ["@markup.heading.5"] = { italic = false },
+      ["@markup.heading.6"] = { italic = false },
+      ["@markup.strong"] = { fg = "#8ec07c", bold = true },
+      ["@markup.italic"] = { fg = "#8ec07c", italic = true },
 
-    RenderMarkdownBullet = { fg = c.cyan },
-    RenderMarkdownCodeBorder = { bg = c.black },
-    RenderMarkdownTableHead = { fg = c.gray03 },
-    RenderMarkdownTableRow = { fg = c.gray03 },
-
-    Search = { sp = c.bright_yellow, underdouble = true },
-
-    ["@markup.heading"] = { fg = c.bright_cyan, bold = true },
-    ["@markup.heading.1"] = { italic = false },
-    ["@markup.heading.2"] = { italic = false },
-    ["@markup.heading.3"] = { italic = false },
-    ["@markup.heading.4"] = { italic = false },
-    ["@markup.heading.5"] = { italic = false },
-    ["@markup.heading.6"] = { italic = false },
-    ["@markup.strong"] = { fg = c.cyan, bold = true },
-    ["@markup.italic"] = { fg = c.cyan, italic = true },
-
-    ["@lsp.typemod.type.defaultLibrary"] = { fg = c.bright_red },
-  }
-  vim.cmd.colorscheme("mellow")
+      ["@lsp.typemod.type.defaultLibrary"] = { fg = "#fb4934" },
+    },
+    dim_inactive = false,
+    transparent_mode = vim.fn.expand("$NEOVIM_TRANSPARENT") == "1",
+  })
+  
+  vim.cmd.colorscheme("gruvbox")
 end)
 
 later(function() -- catppuccin

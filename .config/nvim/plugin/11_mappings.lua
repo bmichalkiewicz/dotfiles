@@ -46,7 +46,8 @@ map("n",       L("/"),   C("Pick buf_lines scope='current' preserve_order=true")
 
 -- Code
 map({"n","x"}, L("ca"),  C("lua vim.lsp.buf.code_action()"),                      "⚡ Code action")
-map("n",       L("cd"),  C("lua vim.lsp.bup.definition()"),                       "󰈮 Goto definition")
+map("n",       L("cd"),  C("lua vim.diagnostic.open_float()"),                     "󰌘 Show diagnostic")
+map("n",       L("cg"),  C("lua vim.lsp.buf.definition()"),                        "󰈮 Goto definition")
 map("n",       L("cD"),  C("Pick lsp scope='declaration'"),                       "󰈮 Goto declaration")
 map("n",       L("ci"),  C("LspInfo"),                                            "󰌘 LSP info")
 map("n",       L("cI"),  C("Pick lsp scope='implementation'"),                    "󰈮 Goto implementation")

@@ -570,8 +570,8 @@ later(function() -- mini.snippets
   local snippets = require("mini.snippets")
   snippets.setup({
     snippets = {
-      snippets.gen_loader.from_file("~/.config/minivim/snippets/global.json"),
-      snippets.gen_loader.from_file("~/.config/minivim/snippets/mini-test.json"),
+      snippets.gen_loader.from_file("~/.config/nvim/snippets/global.json"),
+      snippets.gen_loader.from_file("~/.config/nvim/snippets/mini-test.json"),
       snippets.gen_loader.from_lang(),
     },
   })
