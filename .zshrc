@@ -20,6 +20,9 @@ export PATH
 # Load Cargo environment if it exists
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
+# Devbox
+eval "$(devbox global shellenv --init-hook)"
+
 # Load zsh completion system
 autoload -Uz compinit && compinit
 
@@ -60,9 +63,6 @@ fi
 
 autoload -U promptinit && promptinit
 prompt pure
-
-# Devbox
-eval "$(devbox global shellenv --init-hook)"
 
 # Lazy load completions function
 _load_completion() {

@@ -61,10 +61,10 @@ install_devbox() {
 install_tools() {
     echo "🔧 Installing CLI tools..."
     mkdir -p "$LOCAL_BIN"
-    
+
     # eget for downloading tools
     curl https://zyedidia.github.io/eget.sh | sh
-    
+
     local tools=(
         "go-task/task --asset amd64.tar.gz --to $LOCAL_BIN"
         "mirceanton/kubectl-switch --asset amd64.tar.gz --to $LOCAL_BIN"
@@ -133,7 +133,6 @@ install_python_tools() {
 install_volta() {
     echo "⚡ Installing Volta..."
     curl https://get.volta.sh | bash
-    volta install node
 }
 
 install_rust() {
