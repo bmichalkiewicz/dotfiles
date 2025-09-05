@@ -121,6 +121,7 @@ install_tools() {
         ["zoxide"]="ajeetdsouza/zoxide"
         ["fzf"]="junegunn/fzf"
         ["kubecolor"]="kubecolor/kubecolor"
+        ["k9s"]="derailed/k9s"
     )
 
     # Install tools using bin if not already installed
