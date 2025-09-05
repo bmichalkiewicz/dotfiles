@@ -121,9 +121,9 @@ now(function() -- mini.statusline
         return MiniStatusline.combine_groups({
           { hl = mode_hl,                 strings = { mode:upper() } },
           { hl = 'MiniStatuslineDevinfo', strings = { git, diff } },
-          '%<',   -- Mark general truncate point
+          '%<', -- Mark general truncate point
           { hl = 'MiniStatuslineDirectory', strings = { pathname } },
-          '%=',   -- End left alignment
+          '%=', -- End left alignment
           { hl = 'MiniStatuslineFileinfo',  strings = { diagnostics, filetype, lsp } },
           { hl = mode_hl,                   strings = { search .. location } },
           { hl = 'MiniStatuslineDirectory', strings = {} },
@@ -257,6 +257,16 @@ later(function() -- mini.comment
   require("mini.comment").setup()
 end)
 
+later(function() -- mini.completion
+  require("mini.completion").setup({
+    lsp_completion = { source_func = "omnifunc", auto_setup = false },
+  })
+  local on_attach = function(args)
+    vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+  end
+  vim.api.nvim_create_autocmd("LspAttach", { callback = on_attach })
+  vim.lsp.config("*", { capabilities = MiniCompletion.get_lsp_capabilities() })
+end)
 
 later(function() -- mini.cursorword
   require("mini.cursorword").setup()

@@ -73,13 +73,16 @@ Config.minifiles_open_bufdir = function()
 end
 
 -- MiniPick
-H.truncate_path = function(path)
-  local sep = package.config:sub(1, 1)
-  local parts = vim.split(path, sep)
-  if #parts > 3 then
-    parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+H.sep = package.config:sub(1, 1)
+H.truncate_path = function(max_parts)
+  max_parts = vim.fn.max({ max_parts, 3 })
+  return function(path)
+    local parts = vim.split(path, H.sep)
+    if #parts > max_parts then
+      parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+    end
+    return table.concat(parts, H.sep)
   end
-  return table.concat(parts, sep)
 end
 
 H.map_gsub = function(items, pattern, replacement)
@@ -92,6 +95,8 @@ end
 Config.minipick_align_on_nul = function(buf_id, items, query)
   -- Shorten the pathname to keep the width of the picker window to something
   -- a bit more reasonable for longer pathnames.
+
+  items = H.map_gsub(items, "^%Z+", H.truncate_path(3))
 
   -- Because items is an array of blobs (contains a NUL byte), align_strings
   -- will not work because it expects strings. So, convert the NUL bytes to a
@@ -164,43 +169,61 @@ Config.minihues_apply_custom_highlights = function(p)
   -- Links to Comment by default, but that has italics
   hi("LeapBackdrop", { link = "MiniJump2dDim" })
 
+  hi("BlinkCmpMenu", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpMenuBorder", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpDoc", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpDocBorder", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpDocSeparator", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpLabelMatch", { fg = p.cyan, bg = p.bg, bold = true })
+  hi("BlinkCmpSignatureHelp", { fg = p.fg, bg = p.bg })
+  hi("BlinkCmpSignatureHelpBorder", { fg = p.fg, bg = p.bg })
+
+  hi("BlinkCmpMenu", { link = 'NormalFloat' })
+  hi("BlinkCmpMenuBorder", { link = 'FloatBorder' })
+  hi("BlinkCmpDoc", { link = 'NormalFloat' })
+  hi("BlinkCmpDocBorder", { link = 'FloatBorder' })
+  hi("BlinkCmpSignatureHelp", { link = 'NormalFloat' })
+  hi("BlinkCmpSignatureHelpBorder", { link = 'FloatBorder' })
+
   -- stylua: ignore start
   -- I prefer italic fonts as I use fonts with beautiful italics.
   -- Some examples: Operator Mono, Berkeley Mono, PragmataPro, Radon
-  hi("Comment",                    { fg = p.fg_mid2, bg = nil,         italic = true })
-  hi("DiagnosticVirtualTextError", { fg = p.red,     bg = p.red_bg,    italic = true })
-  hi("DiagnosticVirtualTextHint",  { fg = p.cyan,    bg = p.cyan_bg,   italic = true })
-  hi("DiagnosticVirtualTextInfo",  { fg = p.blue,    bg = p.blue_bg,   italic = true })
-  hi("DiagnosticVirtualTextOk",    { fg = p.green,   bg = p.green_bg,  italic = true })
-  hi("DiagnosticVirtualTextWarn",  { fg = p.yellow,  bg = p.yellow_bg, italic = true })
+  hi("Comment", { fg = p.fg_mid2, bg = nil, italic = true })
+  hi("DiagnosticVirtualTextError", { fg = p.red, bg = p.red_bg, italic = true })
+  hi("DiagnosticVirtualTextHint", { fg = p.cyan, bg = p.cyan_bg, italic = true })
+  hi("DiagnosticVirtualTextInfo", { fg = p.blue, bg = p.blue_bg, italic = true })
+  hi("DiagnosticVirtualTextOk", { fg = p.green, bg = p.green_bg, italic = true })
+  hi("DiagnosticVirtualTextWarn", { fg = p.yellow, bg = p.yellow_bg, italic = true })
 
   -- Highlight patterns for highlighting the whole line and hiding colon.
   -- See https://github.com/echasnovski/mini.nvim/discussions/783
-  hi("MiniHipatternsFixmeBody",  { fg = p.red })
-  hi("MiniHipatternsFixmeColon", { bg = p.red,    fg = p.red,    bold = true })
-  hi("MiniHipatternsHackBody",   { fg = p.yellow })
-  hi("MiniHipatternsHackColon",  { bg = p.yellow, fg = p.yellow, bold = true })
-  hi("MiniHipatternsNoteBody",   { fg = p.cyan })
-  hi("MiniHipatternsNoteColon",  { bg = p.cyan,   fg = p.cyan,   bold = true })
-  hi("MiniHipatternsTodoBody",   { fg = p.blue })
-  hi("MiniHipatternsTodoColon",  { bg = p.blue,   fg = p.blue,   bold = true })
+  hi("MiniHipatternsFixmeBody", { fg = p.red })
+  hi("MiniHipatternsFixmeColon", { bg = p.red, fg = p.red, bold = true })
+  hi("MiniHipatternsHackBody", { fg = p.yellow })
+  hi("MiniHipatternsHackColon", { bg = p.yellow, fg = p.yellow, bold = true })
+  hi("MiniHipatternsNoteBody", { fg = p.cyan })
+  hi("MiniHipatternsNoteColon", { bg = p.cyan, fg = p.cyan, bold = true })
+  hi("MiniHipatternsTodoBody", { fg = p.blue })
+  hi("MiniHipatternsTodoColon", { bg = p.blue, fg = p.blue, bold = true })
 
   -- Bold matches in MiniPick as well.
-  hi("MiniPickMatchRanges",      { bg = nil, fg = p.cyan, bold = true})
+  hi("MiniPickMatchRanges", { bg = nil, fg = p.cyan, bold = true })
 
   -- Highlight patterns for deemphasizing the directory name, so the
   -- filename is more prominent. Visually, this makes it faster to
   -- identify the name of the file.
   -- See https://github.com/echasnovski/mini.nvim/discussions/36#discussioncomment-8889147
-  hi("MiniStatuslineDirectory",        { fg = p.fg_mid2, bg = p.accent_bg })
-  hi("MiniStatuslineFilename",         { fg = p.fg_mid,  bg = p.accent_bg, bold = true })
-  hi("MiniStatuslineFilenameModified", { fg = p.accent,  bg = p.accent_bg, bold = true })
+  hi("MiniStatuslineDirectory", { fg = p.fg_mid2, bg = p.accent_bg })
+  hi("MiniStatuslineFilename", { fg = p.fg_mid, bg = p.accent_bg, bold = true })
+  hi("MiniStatuslineFilenameModified", { fg = p.accent, bg = p.accent_bg, bold = true })
 
-  hi("RenderMarkdownCodeBorder" , { bg = p.bg_mid })
-  hi("RenderMarkdownTableHead" , { fg = p.bg_mid2 })
-  hi("RenderMarkdownTableRow" , { fg = p.bg_mid2 })
+  hi("RenderMarkdownCodeBorder", { bg = p.bg_mid })
+  hi("RenderMarkdownTableHead", { fg = p.bg_mid2 })
+  hi("RenderMarkdownTableRow", { fg = p.bg_mid2 })
+  hi("TreesitterContextLineNumber", { bg = p.bg_edge })
+  hi("TreesitterContextBottom", { sp = p.bg_mid, underdotted = true })
 
-  hi("VertSplit",    { fg = p.bg_edge, bg = nil })
+  hi("VertSplit", { fg = p.bg_edge, bg = nil })
   hi("WinSeparator", { fg = p.bg_edge, bg = nil })
   -- stylua: ignore end
 end
@@ -396,4 +419,3 @@ Config.section_pathname = function(args)
   local modified = vim.bo.modified and " [+]" or ""
   return dir .. file_hl .. file .. modified
 end
-

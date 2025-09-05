@@ -42,49 +42,6 @@ now_if_args(function() -- treesitter
   require("treesitter-context").setup()
 end)
 
-later(function() -- blink
-  add({
-    source = "saghen/blink.cmp",
-    depends = { "rafamadriz/friendly-snippets" },
-    hooks = {
-      post_install = Config.build_blink,
-      post_checkout = Config.build_blink,
-    },
-  })
-
-  require("blink.cmp").setup({
-    keymap = {
-      preset = "enter",
-      -- defer these to mini.keymap binding
-      ["<Tab>"] = { "fallback" },
-      ["<S-Tab>"] = { "fallback" },
-    },
-    completion = {
-      list = { selection = { preselect = false } },
-      documentation = { auto_show = true },
-      menu = {
-        draw = {
-          components = {
-            kind_icon = {
-              text = function(ctx)
-                local kind_icon, _, _ = MiniIcons.get("lsp", ctx.kind)
-                return kind_icon
-              end,
-              highlight = function(ctx)
-                local _, hl, _ = MiniIcons.get("lsp", ctx.kind)
-                return hl
-              end,
-            },
-          },
-        },
-      },
-    },
-    appearance = { nerd_font_variant = "normal" },
-    snippets = { preset = "mini_snippets" },
-    signature = { enabled = true },
-  })
-end)
-
 later(function() -- mason
   add("mason-org/mason.nvim")
   add("mason-org/mason-lspconfig.nvim")
@@ -117,12 +74,12 @@ later(function() -- conform
       return { timeout_ms = 2000, lsp_format = "fallback" }
     end,
     formatters_by_ft = {
-      css        = { "prettierd" },
-      html       = { "prettierd" },
-      json       = { "prettier" },
-      lua        = { "stylua" },
-      markdown   = { "prettierd" },
-      go         = { "gofmt" },
+      css      = { "prettierd" },
+      html     = { "prettierd" },
+      json     = { "prettier" },
+      lua      = { "stylua" },
+      markdown = { "prettierd" },
+      go       = { "gofmt" },
     },
   })
 
@@ -232,7 +189,10 @@ end)
 
 later(function() -- nvim-autopairs
   add("windwp/nvim-autopairs")
-  require("nvim-autopairs").setup()
+  require("nvim-autopairs").setup({
+    map_cr = false,
+    map_bs = false,
+  })
 end)
 
 later(function() -- nvim-lint
@@ -283,10 +243,10 @@ now_if_args(function() -- vim-helm
   add("towolf/vim-helm")
 end)
 
--- Colorschemes  
+-- Colorschemes
 now(function() -- gruvbox
   add("ellisonleao/gruvbox.nvim")
-  
+
   require("gruvbox").setup({
     terminal_colors = true,
     undercurl = true,
@@ -353,7 +313,7 @@ now(function() -- gruvbox
     dim_inactive = false,
     transparent_mode = vim.fn.expand("$NEOVIM_TRANSPARENT") == "1",
   })
-  
+
   vim.cmd.colorscheme("gruvbox")
 end)
 
