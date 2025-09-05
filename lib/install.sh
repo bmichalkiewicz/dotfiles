@@ -150,10 +150,6 @@ install_tools() {
 }
 
 install_helm() {
-    if check_binary_exists "helm"; then
-        return 0
-    fi
-
     echo "⚓ Installing Helm..."
     curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 }
@@ -215,22 +211,14 @@ install_aws_cli() {
 install_python_tools() {
     echo "🐍 Installing Python tools..."
 
-    if ! check_binary_exists "ansible"; then
-        echo "📦 Installing ansible..."
-        $LOCAL_BIN/uv tool install ansible-core --with ansible
-    fi
+    echo "📦 Installing ansible..."
+    $LOCAL_BIN/uv tool install ansible-core --with ansible
 
-    if ! check_binary_exists "gita"; then
-        echo "📦 Installing gita..."
-        $LOCAL_BIN/uv tool install gita
-    fi
+    echo "📦 Installing gita..."
+    $LOCAL_BIN/uv tool install gita
 }
 
 install_volta() {
-    if check_binary_exists "volta"; then
-        return 0
-    fi
-
     echo "⚡ Installing Volta..."
     curl https://get.volta.sh | bash
 }

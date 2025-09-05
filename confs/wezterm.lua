@@ -57,7 +57,7 @@ local status_cache = {}
 
 wezterm.on("update-status", function(window, pane)
   local pane_id = pane:pane_id()
-  
+
   -- Current working directory
   local cwd = pane:get_current_working_dir()
   if cwd then
@@ -76,14 +76,14 @@ wezterm.on("update-status", function(window, pane)
 
   -- Time (update less frequently)
   local time = wezterm.strftime("%H:%M")
-  
+
   -- Create cache key
   local cache_key = cwd .. "|" .. cmd .. "|" .. time
-  
+
   -- Only update if changed
   if status_cache[pane_id] ~= cache_key then
     status_cache[pane_id] = cache_key
-    
+
     -- Right status with gruvbox colors
     window:set_right_status(wezterm.format({
       { Foreground = { Color = "#83a598" } },
@@ -107,7 +107,7 @@ config.disable_default_key_bindings = true
 
 config.keys = {
   -- Clipboard
-  { key = "c",          mods = "CTRL",       action = act.CopyTo("Clipboard") },
+  { key = "c",          mods = "ALT|CTRL",   action = act.CopyTo("Clipboard") },
   { key = "v",          mods = "ALT|CTRL",   action = act.PasteFrom("Clipboard") },
 
   -- Search and Copy Mode
@@ -149,17 +149,17 @@ config.keys = {
 
   -- Workspace management
   { key = "w",          mods = "CTRL|SHIFT", action = act.ShowLauncherArgs({ flags = "WORKSPACES" }) },
-  
+
   -- Tab activation keys (ALT+1-9)
-  { key = "1", mods = "ALT", action = act.ActivateTab(0) },
-  { key = "2", mods = "ALT", action = act.ActivateTab(1) },
-  { key = "3", mods = "ALT", action = act.ActivateTab(2) },
-  { key = "4", mods = "ALT", action = act.ActivateTab(3) },
-  { key = "5", mods = "ALT", action = act.ActivateTab(4) },
-  { key = "6", mods = "ALT", action = act.ActivateTab(5) },
-  { key = "7", mods = "ALT", action = act.ActivateTab(6) },
-  { key = "8", mods = "ALT", action = act.ActivateTab(7) },
-  { key = "9", mods = "ALT", action = act.ActivateTab(8) },
+  { key = "1",          mods = "ALT",        action = act.ActivateTab(0) },
+  { key = "2",          mods = "ALT",        action = act.ActivateTab(1) },
+  { key = "3",          mods = "ALT",        action = act.ActivateTab(2) },
+  { key = "4",          mods = "ALT",        action = act.ActivateTab(3) },
+  { key = "5",          mods = "ALT",        action = act.ActivateTab(4) },
+  { key = "6",          mods = "ALT",        action = act.ActivateTab(5) },
+  { key = "7",          mods = "ALT",        action = act.ActivateTab(6) },
+  { key = "8",          mods = "ALT",        action = act.ActivateTab(7) },
+  { key = "9",          mods = "ALT",        action = act.ActivateTab(8) },
 }
 
 -- Platform-specific configuration
