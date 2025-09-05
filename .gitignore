@@ -3,3 +3,5 @@
 /.kube/config*
 /.kube/cache
 /.claude
+/.config/bin
+

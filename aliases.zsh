@@ -19,7 +19,7 @@ alias trea='eza --all --tree $EZA_PARAMS'
 alias cat='bat --paging never --theme DarkNeon --style plain'
 
 # vim
-alias vim='nvim'
+alias vim="nvim.appimage"
 alias fim='fzf --multi --bind "enter:become(vim {})"'
 
 # git
@@ -37,14 +37,11 @@ alias k='kubecolor'
 alias kns='kubectl-switch ns'
 alias kctx='kubectl-switch ctx'
 
-# vim
-alias vim='nvim'
-
-# devbox
-alias ds='devbox shell'
-
 # sudo
 alias please='sudo !!'
 
 # argocd
 alias ac="argo-cd"
+
+# lazygit
+alias lg="lazygit"
