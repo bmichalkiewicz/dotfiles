@@ -120,6 +120,7 @@ install_tools() {
         ["bat"]="sharkdp/bat"
         ["zoxide"]="ajeetdsouza/zoxide"
         ["fzf"]="junegunn/fzf"
+        ["kubecolor"]="kubecolor/kubecolor"
     )
 
     # Install tools using bin if not already installed
