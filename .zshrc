@@ -3,7 +3,6 @@ export ZSH="$HOME/.oh-my-zsh"
 export VOLTA_HOME="$HOME/.volta"
 export GIT_PATH="$HOME/git"
 export GOPATH="$HOME/go/packages"
-export DEVBOX_NO_PROMPT=true
 export KUBECONFIG_DIR="$HOME/.kube/config.d"
 
 # Path Configuration
@@ -19,9 +18,6 @@ export PATH
 
 # Load Cargo environment if it exists
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-
-# Devbox
-eval "$(devbox global shellenv --init-hook)"
 
 # Load zsh completion system
 autoload -Uz compinit && compinit

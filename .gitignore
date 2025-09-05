@@ -2,3 +2,4 @@
 /dotfiles
 /.kube/config*
 /.kube/cache
+/.claude
