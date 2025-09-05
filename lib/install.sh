@@ -225,15 +225,6 @@ install_volta() {
     curl https://get.volta.sh | bash
 }
 
-install_rust() {
-    if check_binary_exists "rustc"; then
-        return 0
-    fi
-
-    echo "🦀 Installing Rust..."
-    curl https://sh.rustup.rs -sSf | sh
-}
-
 install_claude() {
     if check_binary_exists "claude"; then
         return 0

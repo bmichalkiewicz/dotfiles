@@ -15,7 +15,6 @@ main() {
     install_aws_cli
     install_python_tools
     install_volta
-    install_rust
     install_claude
     setup_zsh
 
