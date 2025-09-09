@@ -81,7 +81,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Extra tools with error checking
-command -v zoxide &> /dev/null && eval "$(zoxide init zsh)"
+command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
 command -v kubecolor &> /dev/null && compdef kubecolor=kubectl
 
 # Superfile with directory tracking
