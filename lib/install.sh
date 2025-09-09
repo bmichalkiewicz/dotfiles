@@ -122,6 +122,7 @@ install_tools() {
         ["fzf"]="junegunn/fzf"
         ["kubecolor"]="kubecolor/kubecolor"
         ["k9s"]="derailed/k9s"
+        ["spf"]="yorukot/superfile"
     )
 
     # Install tools using bin if not already installed
