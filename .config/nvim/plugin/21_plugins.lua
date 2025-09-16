@@ -57,6 +57,7 @@ later(function() -- mason
       "helm_ls",
       "jsonls",
       "yamlls",
+      "terraformls"
     },
     automatic_installation = true,
   })

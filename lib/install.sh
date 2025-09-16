@@ -33,7 +33,7 @@ check_binary_exists() {
     fi
 
     # Also check if it's managed by bin tool
-    if command -v bin >/dev/null 2>&1 && bin list 2>/dev/null | grep -q "$package_name"; then
+    if command -v bin >/dev/null 2>&1 && bin list 2>/dev/null | grep -q -e "$package_name\s"; then
         echo "✓ $package_name is already managed by bin, skipping..."
         return 0  # exists
     fi
@@ -123,6 +123,7 @@ install_tools() {
         ["kubecolor"]="kubecolor/kubecolor"
         ["k9s"]="derailed/k9s"
         ["spf"]="yorukot/superfile"
+        ["pug"]="leg100/pug"
     )
 
     # Install tools using bin if not already installed

@@ -45,3 +45,8 @@ alias ac="argo-cd"
 
 # lazygit
 alias lg="lazygit"
+
+# terraform
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tf='terraform'

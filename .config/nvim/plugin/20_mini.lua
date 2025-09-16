@@ -84,7 +84,6 @@ now(function() -- mini.starter
       return banner .. Config.pad(msg, n)
     end,
 
-    footer = Config.fortune(),
   })
 end)
 

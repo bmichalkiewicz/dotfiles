@@ -16,9 +16,6 @@ path=(
 )
 export PATH
 
-# Load Cargo environment if it exists
-[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-
 # Load zsh completion system
 autoload -Uz compinit && compinit
 
@@ -34,6 +31,7 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   aws
+  colored-man-pages
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -93,9 +91,9 @@ if command -v spf &> /dev/null; then
       Darwin) spf_last_dir="$HOME/Library/Application Support/superfile/lastdir" ;;
       *) command spf "$@"; return ;;
     esac
-    
+
     command spf "$@"
-    
+
     [[ -f "$spf_last_dir" ]] && {
       . "$spf_last_dir"
       rm -f "$spf_last_dir" 2>/dev/null
