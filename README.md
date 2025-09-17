@@ -1,6 +1,6 @@
 # 🏠 Dotfiles
 
-A comprehensive development environment setup with modern tools and configurations for Debian/Ubuntu systems.
+A comprehensive development environment setup using GNU Stow for dotfile management with modern tools and configurations for Debian/Ubuntu systems.
 
 ## 🚀 Features
 
@@ -28,7 +28,7 @@ A comprehensive development environment setup with modern tools and configuratio
 ### ☁️ Cloud & DevOps
 - **AWS CLI**: Latest version with configuration
 - **Ansible**: Infrastructure automation
-- **Devbox**: Reproducible development environments
+- **GNU Stow**: Symlink management for dotfiles
 - **gita**: Multi-repository management
 
 ## 📋 Prerequisites
@@ -56,10 +56,9 @@ cd ~/dotfiles
 chmod +x ./install.sh && ./install.sh
 ```
 
-3. **Activate devbox environment and sync configurations**:
+3. **Sync configurations using GNU Stow**:
 ```bash
-devbox shell
-devbox run sync
+stow --no-folding .
 ```
 
 4. **Reload your shell**:
@@ -72,7 +71,7 @@ source ~/.zshrc
 If you prefer to understand what each step does:
 
 1. **System packages**: Updates system and installs build essentials, curl, git, etc.
-2. **Devbox**: Installs Jetify Devbox for reproducible environments
+2. **GNU Stow**: Installs Stow for dotfile symlink management
 3. **CLI tools**: Downloads modern alternatives (eza, bat, lazygit, etc.)
 4. **Docker**: Installs Docker CE with compose plugin
 5. **Cloud tools**: AWS CLI, Helm, kubectl
@@ -86,8 +85,9 @@ If you prefer to understand what each step does:
 dotfiles/
 ├── .zshrc              # ZSH configuration with plugins and aliases
 ├── .gitconfig          # Git global configuration
+├── .kube/              # Kubernetes configuration
 ├── aliases.zsh         # Custom command aliases
-├── devbox.json         # Devbox environment specification
+├── .stow-local-ignore  # Files to exclude from Stow symlinking
 ├── install.sh          # Main installation script
 ├── lib/
 │   └── install.sh      # Installation functions library
@@ -175,16 +175,16 @@ The `.zshrc` sets up:
 ### Common Issues
 
 1. **Permission denied**: Ensure `install.sh` is executable: `chmod +x install.sh`
-2. **Devbox not found**: Restart your terminal after installation
-3. **Stow conflicts**: Remove existing dotfiles before running sync
-4. **ZSH not default**: Run `chsh -s $(which zsh)` to set as default shell
+2. **Stow conflicts**: Remove existing dotfiles before running `stow --no-folding .`
+3. **ZSH not default**: Run `chsh -s $(which zsh)` to set as default shell
+4. **Missing dependencies**: Ensure GNU Stow is installed: `sudo apt install stow`
 
 ### Verification
 
 Check if tools are installed correctly:
 ```bash
 # Verify installations
-devbox version
+stow --version
 docker --version
 aws --version
 kubectl version --client
@@ -207,7 +207,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - [Oh My Zsh](https://ohmyz.sh/) for the ZSH framework
 - [Catppuccin](https://catppuccin.com/) for the beautiful color theme
-- [Jetify](https://www.jetify.com/devbox) for Devbox
+- [GNU Stow](https://www.gnu.org/software/stow/) for dotfile management
 - All the amazing tool creators that make development better
 
 ---
