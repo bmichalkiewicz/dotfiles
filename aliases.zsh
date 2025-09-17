@@ -50,3 +50,6 @@ alias lg="lazygit"
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tf='terraform'
+
+# WSL
+alias open='explorer.exe `wslpath -w "$PWD"`'
