@@ -244,6 +244,13 @@ now_if_args(function() -- vim-helm
   add("towolf/vim-helm")
 end)
 
+later(function() -- grug-far
+  add("MagicDuck/grug-far.nvim")
+  config = function()
+    require("grug-far").setup({})
+  end
+end)
+
 -- Colorschemes
 now(function() -- gruvbox
   add("ellisonleao/gruvbox.nvim")

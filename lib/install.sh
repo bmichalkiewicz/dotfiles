@@ -124,6 +124,7 @@ install_tools() {
         ["k9s"]="derailed/k9s"
         ["spf"]="yorukot/superfile"
         ["pug"]="leg100/pug"
+        ["dyff"]="homeport/dyff"
     )
 
     # Install tools using bin if not already installed

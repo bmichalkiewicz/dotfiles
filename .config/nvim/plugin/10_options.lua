@@ -26,6 +26,7 @@ vim.o.textwidth      = 78
 vim.o.wildmode       = "longest:full,full"
 vim.o.winborder      = "rounded"
 vim.o.winminwidth    = 5
+vim.o.relativenumber = true
 
 -- Fold settings
 vim.o.foldexpr       = "v:lua.vim.treesitter.foldexpr()"

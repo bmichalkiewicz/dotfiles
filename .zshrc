@@ -73,6 +73,7 @@ _load_completion docker "docker completion zsh"
 _load_completion kubectl "kubectl completion zsh"
 _load_completion kubectl-switch "kubectl-switch completion zsh"
 _load_completion k9s "k9s completion zsh"
+_load_completion dyff "dyff completion zsh"
 
 # Autosuggest settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
