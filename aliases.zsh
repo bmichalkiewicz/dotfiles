@@ -11,7 +11,6 @@ EZA_PARAMS=(
 alias ls='eza $EZA_PARAMS'
 alias la='eza $EZA_PARAMS --all'
 alias lg='eza $EZA_PARAMS --git-ignore --all'
-alias ll='eza -halF --icons=always'
 alias tree='eza --tree $EZA_PARAMS'
 alias trea='eza --all --tree $EZA_PARAMS'
 
@@ -36,9 +35,6 @@ alias gch='git checkout'
 alias k='kubecolor'
 alias kns='kubectl-switch ns'
 alias kctx='kubectl-switch ctx'
-
-# sudo
-alias please='sudo !!'
 
 # argocd
 alias ac="argo-cd"
