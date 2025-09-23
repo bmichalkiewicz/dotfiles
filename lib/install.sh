@@ -125,6 +125,7 @@ install_tools() {
         ["spf"]="yorukot/superfile"
         ["pug"]="leg100/pug"
         ["dyff"]="homeport/dyff"
+        ["envsubst"]="a8m/envsubst"
     )
 
     # Install tools using bin if not already installed
