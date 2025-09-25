@@ -1,0 +1,2 @@
+[wsl2]
+kernelCommandLine = sysctl.vm.max_map_count=262144 fs.inotify.max_user_watches=524288 fs.inotify.max_user_instances=512
