@@ -1,12 +1,11 @@
 local hues = require("mini.hues")
 local opts = {
   accent = "purple",
-  background = "#151025",
-  foreground = "#B6BCBF",
+  background = "#232030",
+  foreground = "#c6c6cd",
 }
 hues.setup(opts)
 local p = hues.get_palette()
 p.accent_bg = p.bg_edge
 hues.apply_palette(p)
-Config.minihues_apply_custom_highlights(p)
 vim.g.colors_name = "minihues-purple"

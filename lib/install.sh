@@ -103,7 +103,6 @@ install_tools() {
     declare -A tools_map=(
         ["task"]="go-task/task"
         ["kubectl-switch"]="mirceanton/kubectl-switch"
-        ["nvim"]="neovim/neovim"
         ["lazygit"]="jesseduffield/lazygit"
         ["lazydocker"]="jesseduffield/lazydocker"
         ["gloner"]="bmichalkiewicz/gloner"
@@ -237,6 +236,14 @@ install_claude() {
     echo "🤖 Installing Claude CLI..."
     curl -fsSL claude.ai/install.sh | bash
 }
+
+install_neovim() {
+  if check_binary_exists "nvim"; then
+    return 0
+  fi
+
+  bin install https://github.com/neovim/neovim/releases/tag/nightly nvim
+ }
 
 setup_zsh() {
     echo "🐚 Setting up ZSH..."

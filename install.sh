@@ -16,6 +16,7 @@ main() {
     install_python_tools
     install_volta
     install_claude
+    install_neovim
     setup_zsh
 
     echo " Installation complete!"

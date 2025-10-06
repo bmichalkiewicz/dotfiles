@@ -1,332 +1,5 @@
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-local now_if_args = vim.fn.argc(-1) > 0 and now or later
-
-now_if_args(function() -- treesitter
-  add({
-    source = "nvim-treesitter/nvim-treesitter",
-    checkout = "main",
-    hooks = {
-      post_checkout = function()
-        vim.cmd("TSUpdate")
-      end,
-    },
-  })
-  add({ source = "nvim-treesitter/nvim-treesitter-textobjects", checkout = "main" })
-  add({ source = "nvim-treesitter/nvim-treesitter-context" })
-
-  local ensure_installed = {
-    "bash",
-    "css",
-    "go",
-    "helm",
-    "html",
-    "json",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "regex",
-    "toml",
-    "yaml",
-  }
-  require("nvim-treesitter").install(ensure_installed)
-  local filetypes = vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
-  vim.list_extend(filetypes, { "markdown", "pandoc" })
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = filetypes,
-    callback = function(ev)
-      vim.treesitter.start(ev.buf)
-    end,
-  })
-
-  require("treesitter-context").setup()
-end)
-
-later(function() -- mason
-  add("mason-org/mason.nvim")
-  add("mason-org/mason-lspconfig.nvim")
-
-  require("mason").setup()
-
-  require("mason-lspconfig").setup({
-    ensure_installed = {
-      "gopls",
-      "lua_ls",
-      "basedpyright",
-      "marksman",
-      "helm_ls",
-      "jsonls",
-      "yamlls",
-      "terraformls"
-    },
-    automatic_installation = true,
-  })
-end)
-
-later(function() -- conform
-  add("stevearc/conform.nvim")
-
-  require("conform").setup({
-    notify_on_error = true,
-    format_on_save = function(bufnr)
-      if vim.g.disable_autoformat then
-        return
-      end
-      return { timeout_ms = 2000, lsp_format = "fallback" }
-    end,
-    formatters_by_ft = {
-      css      = { "prettierd" },
-      html     = { "prettierd" },
-      json     = { "prettier" },
-      lua      = { "stylua" },
-      markdown = { "prettierd" },
-      go       = { "gofmt" },
-    },
-  })
-
-  vim.api.nvim_create_user_command("FormatToggle", function(_)
-    vim.g.disable_autoformat = not vim.g.disable_autoformat
-    local state = vim.g.disable_autoformat and "disabled" or "enabled"
-    vim.notify("Auto-save " .. state)
-  end, {
-    desc = "Toggle autoformat-on-save",
-  })
-end)
-
-later(function() -- lazydev
-  add("folke/lazydev.nvim")
-  require("lazydev").setup()
-end)
-
-later(function() -- leap
-  add("ggandor/leap.nvim")
-  require("leap.user").set_repeat_keys("<CR>", "<BS>")
-  require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
-end)
-
-later(function() -- lsp
-  add("neovim/nvim-lspconfig")
-
-  vim.diagnostic.config({
-    underline = false,
-    update_in_insert = false,
-    severity_sort = true,
-  })
-
-  vim.lsp.enable({
-    "gopls",
-    "bashls",
-    "ansiblels",
-    "lua_ls",
-    "basedpyright",
-    "marksman",
-    "helm_ls",
-    "jsonls",
-    "yamlls",
-  })
-
-  vim.lsp.config["*"] = {
-    capabilities = {
-      workspace = {
-        fileOperations = {
-          didRename = true,
-          willRename = true,
-        },
-      },
-    },
-  }
-end)
-
-later(function() -- quicker
-  add("stevearc/quicker.nvim")
-  require("quicker").setup({
-    keys = {
-      { ">", "<Cmd>lua require('quicker').expand({ add_to_existing = true })<Cr>", desc = "Expand quickfix context" },
-      { "<", "<Cmd>lua require('quicker').collapse()<Cr>",                         desc = "Collapse quickfix context" },
-    },
-  })
-end)
-
-later(function() -- render-markdown
-  add("MeanderingProgrammer/render-markdown.nvim")
-  require("render-markdown").setup({
-    file_types = { "markdown", "md" },
-    render_modes = { "n", "no", "c", "t", "i", "ic" },
-    checkbox = {
-      enable = true,
-      position = "inline",
-    },
-    code = {
-      sign = false,
-      border = "thin",
-      position = "right",
-      width = "block",
-      above = "▁",
-      below = "▔",
-      language_left = "█",
-      language_right = "█",
-      language_border = "▁",
-      left_pad = 1,
-      right_pad = 1,
-    },
-    heading = {
-      width = "block",
-      backgrounds = {
-        "MiniStatusLineModeNormal",
-        "MiniStatusLineModeInsert",
-        "MiniStatusLineModeOther",
-        "MiniStatusLineModeReplace",
-        "MiniStatusLineModeCommand",
-        "MiniStatusLineModeVisual",
-      },
-      sign = false,
-      left_pad = 1,
-      right_pad = 0,
-      position = "right",
-      icons = { "", "", "", "", "", "" },
-    },
-  })
-end)
-
-later(function() -- nvim-autopairs
-  add("windwp/nvim-autopairs")
-  require("nvim-autopairs").setup({
-    map_cr = false,
-    map_bs = false,
-  })
-end)
-
-later(function() -- nvim-lint
-  add("mfussenegger/nvim-lint")
-  local lint = require("lint")
-  lint.linters_by_ft = {
-    markdown = { "markdownlint-cli2" },
-    sh = { "shellcheck" },
-  }
-
-  local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-    group = lint_augroup,
-    callback = function()
-      lint.try_lint()
-    end,
-  })
-end)
-
-later(function() -- toggleterm
-  add("akinsho/toggleterm.nvim")
-
-  require("toggleterm").setup({
-    highlights = { FloatBorder = { link = "FloatBorder" } },
-    open_mapping = [[<c-\>]],
-    on_create = function(term)
-      local opts = { buffer = term.bufnr }
-      vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
-    end,
-    shading_factor = -20,
-  })
-
-  Config.lazygit_toggle = function()
-    local lazygit = require("toggleterm.terminal").Terminal:new({
-      cmd = "lazygit",
-      hidden = true,
-      highlights = { FloatBorder = { link = "FloatBorder" } },
-      direction = "float",
-      on_open = function(term)
-        vim.keymap.del("t", "<Esc><Esc>", { buffer = term.bufnr })
-      end,
-    })
-    lazygit:toggle()
-  end
-end)
-
-now_if_args(function() -- vim-helm
-  add("towolf/vim-helm")
-end)
-
-later(function() -- grug-far
-  add("MagicDuck/grug-far.nvim")
-  config = function()
-    require("grug-far").setup({})
-  end
-end)
-
--- Colorschemes
-now(function() -- gruvbox
-  add("ellisonleao/gruvbox.nvim")
-
-  require("gruvbox").setup({
-    terminal_colors = true,
-    undercurl = true,
-    underline = true,
-    bold = true,
-    italic = {
-      strings = true,
-      emphasis = true,
-      comments = true,
-      operators = false,
-      folds = true,
-    },
-    strikethrough = true,
-    invert_selection = false,
-    invert_signs = false,
-    invert_tabline = false,
-    invert_intend_guides = false,
-    inverse = true,
-    contrast = "", -- can be "hard", "soft" or empty string
-    palette_overrides = {},
-    overrides = {
-      MiniHipatternsFixmeBody = { fg = "#fb4934" },
-      MiniHipatternsFixme = { fg = "#1d2021", bg = "#fb4934" },
-      MiniHipatternsFixmeColon = { bg = "#fb4934", fg = "#fb4934", bold = true },
-
-      MiniHipatternsHackBody = { fg = "#fe8019" },
-      MiniHipatternsHack = { fg = "#1d2021", bg = "#fe8019" },
-      MiniHipatternsHackColon = { bg = "#fe8019", fg = "#fe8019", bold = true },
-
-      MiniHipatternsNoteBody = { fg = "#fabd2f" },
-      MiniHipatternsNote = { fg = "#1d2021", bg = "#fabd2f" },
-      MiniHipatternsNoteColon = { bg = "#fabd2f", fg = "#fabd2f", bold = true },
-
-      MiniHipatternsTodoBody = { fg = "#83a598" },
-      MiniHipatternsTodo = { fg = "#1d2021", bg = "#83a598" },
-      MiniHipatternsTodoColon = { bg = "#83a598", fg = "#83a598", bold = true },
-
-      MiniJump = { sp = "#fabd2f", undercurl = true },
-
-      MiniStatuslineDirectory = { fg = "#928374" },
-      MiniStatuslineFilenameModified = { fg = "#fb4934", bold = true },
-
-      NormalNC = { link = "Normal" },
-
-      RenderMarkdownBullet = { fg = "#8ec07c" },
-      RenderMarkdownCodeBorder = { bg = "#1d2021" },
-      RenderMarkdownTableHead = { fg = "#928374" },
-      RenderMarkdownTableRow = { fg = "#928374" },
-
-      Search = { sp = "#fabd2f", underdouble = true },
-
-      ["@markup.heading"] = { fg = "#8ec07c", bold = true },
-      ["@markup.heading.1"] = { italic = false },
-      ["@markup.heading.2"] = { italic = false },
-      ["@markup.heading.3"] = { italic = false },
-      ["@markup.heading.4"] = { italic = false },
-      ["@markup.heading.5"] = { italic = false },
-      ["@markup.heading.6"] = { italic = false },
-      ["@markup.strong"] = { fg = "#8ec07c", bold = true },
-      ["@markup.italic"] = { fg = "#8ec07c", italic = true },
-
-      ["@lsp.typemod.type.defaultLibrary"] = { fg = "#fb4934" },
-    },
-    dim_inactive = false,
-    transparent_mode = vim.fn.expand("$NEOVIM_TRANSPARENT") == "1",
-  })
-
-  vim.cmd.colorscheme("gruvbox")
-end)
-
-later(function() -- catppuccin
-  add({ source = "catppuccin/nvim", name = "catppuccin" })
+MiniDeps.later(function()
+  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }, { load = true })
   require("catppuccin").setup({
     default_integrations = false,
     integrations = {
@@ -367,7 +40,7 @@ later(function() -- catppuccin
           RenderMarkdownCode = { bg = colors.mantle },
           RenderMarkdownTableHead = { fg = colors.overlay0 },
           RenderMarkdownTableRow = { fg = colors.overlay0 },
-          ["@markup.quote"] = { fg = colors.maroon, style = { "italic" } },
+          ["@markup.quote"] = { fg = colors.maroon, style = { "italic" } }, -- block quotes
         }
         return overrides
       end,
@@ -383,6 +56,7 @@ later(function() -- catppuccin
           CmpItemAbbrMatch = { fg = colors.green, style = { "bold" } },
           CmpItemAbbrMatchFuzzy = { fg = colors.green, style = { "bold" } },
 
+          -- Mini customizations
           MiniClueDescGroup = { fg = colors.mauve },
           MiniClueDescSingle = { fg = colors.sapphire },
           MiniClueNextKey = { fg = colors.yellow },
@@ -446,6 +120,7 @@ later(function() -- catppuccin
         end
         return overrides
       end,
+      -- This is a comment and for the love of ...
       macchiato = function(colors)
         local overrides = {
           CurSearch = { bg = colors.peach },
@@ -459,11 +134,14 @@ later(function() -- catppuccin
           ["@string.special.symbol"] = { link = "Special" },
           ["@constructor.lua"] = { fg = colors.pink },
 
+          -- Better markdown code block compat w/ mini.hues
           KazCodeBlock = { bg = colors.crust },
 
+          -- Links to Comment by default, but that has italics
           LeapBackdrop = { link = "MiniJump2dDim" },
           LeapLabel = { fg = colors.peach, style = { "bold" } },
 
+          -- Mini customizations
           MiniClueDescGroup = { fg = colors.pink },
           MiniClueDescSingle = { fg = colors.sapphire },
           MiniClueNextKey = { fg = colors.text, style = { "bold" } },
@@ -473,6 +151,8 @@ later(function() -- catppuccin
           MiniFilesFile = { fg = colors.overlay2 },
           MiniFilesTitleFocused = { fg = colors.peach, style = { "bold" } },
 
+          -- Highlight patterns for highlighting the whole line and hiding colon.
+          -- See https://github.com/echasnovski/mini.nvim/discussions/783
           MiniHipatternsFixmeBody = { fg = colors.red, bg = colors.base },
           MiniHipatternsFixmeColon = { bg = colors.red, fg = colors.red, style = { "bold" } },
           MiniHipatternsHackBody = { fg = colors.yellow, bg = colors.base },
@@ -492,7 +172,7 @@ later(function() -- catppuccin
           MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
           MiniPickBorderText = { fg = colors.blue },
-          MiniPickMatchCurrent = { fg = nil, bg = colors.surface1, style = { "bold" } },
+          MiniPickMatchCurrent = { fg = colors.text, bg = colors.surface1, style = { "bold" } },
           MiniPickMatchRanges = { fg = colors.text, style = { "bold" } },
           MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
           MiniPickPrompt = { fg = colors.sky },
@@ -559,4 +239,5 @@ later(function() -- catppuccin
       },
     },
   })
+  -- vim.cmd.colorscheme("catppuccin-macchiato")
 end)
