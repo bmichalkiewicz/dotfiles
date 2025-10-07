@@ -83,7 +83,8 @@ install_tools() {
         echo "📦 Installing bin tool manager..."
         if curl -L https://github.com/marcosnils/bin/releases/download/v0.23.1/bin_0.23.1_linux_amd64 --output bin; then
             chmod +x bin
-            if ./bin install github.com/marcosnils/bin; then
+            if sudo ./bin install github.com/marcosnils/bin; then
+		sudo chmod +x /usr/local/bin/bin
                 rm -rf ./bin
                 echo "✓ bin tool manager installed successfully"
             else
@@ -226,6 +227,7 @@ install_python_tools() {
 install_volta() {
     echo "⚡ Installing Volta..."
     curl https://get.volta.sh | bash
+    volta install node
 }
 
 install_claude() {
