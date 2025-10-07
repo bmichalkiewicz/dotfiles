@@ -12,16 +12,6 @@ MiniDeps.now(function()
     return ("Good %s, %s"):format(day_part, username)
   end
 
-  local fortune = function()
-    local ok, quote = pcall(function()
-      local f = assert(io.popen("fortune -s", "r"))
-      local s = assert(f:read("*a"))
-      f:close()
-      return s
-    end)
-    return ok and quote or nil
-  end
-
   local longest_line = function(s)
     local lines = vim.fn.split(s, "\n")
     local lengths = vim.tbl_map(vim.fn.strdisplaywidth, lines)
@@ -38,11 +28,10 @@ MiniDeps.now(function()
       starter.sections.sessions(5, true),
       starter.sections.recent_files(3, false, false),
       {
-        { name = "Mason",         action = "Mason",                 section = "Updaters"},
-        { name = "Update deps",   action = "lua vim.pack.update()", section = "Updaters"},
-        { name = "New Meeting",   action = "ZkNewMeeting",          section = "Actions"},
-        { name = "Visited files", action = "Pick visit_paths",      section = "Actions"},
-        { name = "Quit Neovim",   action = "qall",                  section = "Actions"},
+        { name = "Mason",         action = "Mason",                 section = "Updaters" },
+        { name = "Update deps",   action = "lua vim.pack.update()", section = "Updaters" },
+        { name = "Visited files", action = "Pick visit_paths",      section = "Actions" },
+        { name = "Quit Neovim",   action = "qall",                  section = "Actions" },
       },
     },
 
@@ -74,7 +63,6 @@ MiniDeps.now(function()
     end,
 
     -- Fortune slows startup by about 10ms ... ugh
-    footer = fortune(),
-    -- footer = "",
+    footer = "Placki",
   })
 end)

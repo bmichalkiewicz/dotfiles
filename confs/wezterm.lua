@@ -107,8 +107,8 @@ config.disable_default_key_bindings = true
 
 config.keys = {
   -- Clipboard
-  { key = "c",          mods = "ALT|CTRL",   action = act.CopyTo("Clipboard") },
-  { key = "v",          mods = "ALT|CTRL",   action = act.PasteFrom("Clipboard") },
+  { key = "c",          mods = "SHIFT|CTRL",   action = act.CopyTo("Clipboard") },
+  { key = "v",          mods = "SHIFT|CTRL",   action = act.PasteFrom("Clipboard") },
 
   -- Search and Copy Mode
   { key = "f",          mods = "CTRL|SHIFT", action = act.Search({ CaseInSensitiveString = "" }) },

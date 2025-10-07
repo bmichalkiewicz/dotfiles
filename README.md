@@ -58,6 +58,7 @@ chmod +x ./install.sh && ./install.sh
 
 3. **Sync configurations using GNU Stow**:
 ```bash
+rm ~/.zshrc
 stow --no-folding .
 ```
 
