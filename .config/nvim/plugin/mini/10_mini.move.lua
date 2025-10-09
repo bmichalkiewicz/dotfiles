@@ -2,15 +2,15 @@ MiniDeps.later(function()
   require("mini.move").setup(
     {
       mappings = {
-      left  = '<S-left>',
-      right = '<S-right>',
-      down  = '<S-down>',
-      up    = '<S-up>',
+      left  = '<S-h>',
+      right = '<S-l>',
+      down  = '<S-j>',
+      up    = '<S-k>',
 
-      line_left  = '<S-left>',
-      line_right = '<S-right>',
-      line_down  = '<S-down>',
-      line_up    = '<S-up>',
+      line_left  = '<S-h>',
+      line_right = '<S-l>',
+      line_down  = '<S-j>',
+      line_up    = '<S-k>',
       }
   }
   )
