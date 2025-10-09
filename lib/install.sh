@@ -133,7 +133,7 @@ install_tools() {
         local repo="${tools_map[$binary_name]}"
         if ! check_binary_exists "$binary_name" "$repo"; then
             echo "📦 Installing $binary_name..."
-            if ! bin install "github.com/$repo ${LOCAL_BIN}"; then
+            if ! bin install "github.com/$repo" ${LOCAL_BIN}; then
                 echo "⚠️ Failed to install $binary_name, continuing with other tools..."
             fi
         fi
