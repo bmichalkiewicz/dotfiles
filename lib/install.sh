@@ -227,7 +227,7 @@ install_python_tools() {
 install_volta() {
     echo "⚡ Installing Volta..."
     curl https://get.volta.sh | bash
-    volta install node
+    ~/.volta/bin/volta install node
 }
 
 install_claude() {
