@@ -83,8 +83,8 @@ install_tools() {
         echo "📦 Installing bin tool manager..."
         if curl -L https://github.com/marcosnils/bin/releases/download/v0.23.1/bin_0.23.1_linux_amd64 --output bin; then
             chmod +x bin
-            if sudo ./bin install github.com/marcosnils/bin; then
-		sudo chmod +x /usr/local/bin/bin
+            if sudo ./bin install github.com/marcosnils/bin /usr/local/bin/bin; then
+	             	sudo chmod +x /usr/local/bin/bin
                 rm -rf ./bin
                 echo "✓ bin tool manager installed successfully"
             else
@@ -133,7 +133,7 @@ install_tools() {
         local repo="${tools_map[$binary_name]}"
         if ! check_binary_exists "$binary_name" "$repo"; then
             echo "📦 Installing $binary_name..."
-            if ! bin install "github.com/$repo"; then
+            if ! bin install "github.com/$repo ${LOCAL_BIN}"; then
                 echo "⚠️ Failed to install $binary_name, continuing with other tools..."
             fi
         fi
@@ -142,14 +142,14 @@ install_tools() {
     # Install HashiCorp tools
     if ! check_binary_exists "terraform"; then
         echo "📦 Installing terraform..."
-        if ! bin install --provider hashicorp https://releases.hashicorp.com/terraform; then
+        if ! bin install --provider hashicorp https://releases.hashicorp.com/terraform ${LOCAL_BIN}; then
             echo "⚠️ Failed to install terraform, continuing..."
         fi
     fi
 
     if ! check_binary_exists "packer"; then
         echo "📦 Installing packer..."
-        if ! bin install --provider hashicorp https://releases.hashicorp.com/packer; then
+        if ! bin install --provider hashicorp https://releases.hashicorp.com/packer ${LOCAL_BIN}; then
             echo "⚠️  Failed to install packer, continuing..."
         fi
     fi
@@ -244,7 +244,7 @@ install_neovim() {
     return 0
   fi
 
-  bin install https://github.com/neovim/neovim/releases/tag/nightly nvim
+  bin install https://github.com/neovim/neovim/releases/tag/nightly ${LOCAL_BIN}/nvim
  }
 
 setup_zsh() {

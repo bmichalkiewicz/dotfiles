@@ -62,7 +62,6 @@ MiniDeps.now(function()
       return banner .. pad(msg, msg_pad)
     end,
 
-    -- Fortune slows startup by about 10ms ... ugh
-    footer = "Placki",
+    footer = "Jest malina",
   })
 end)
