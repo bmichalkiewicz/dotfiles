@@ -64,10 +64,16 @@ MiniDeps.later(function()
     return enabled_explicitly or auto_enable[ft] and not disabled
   end
 
-  vim.api.nvim_create_autocmd("BufEnter", {
+  Config.new_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("kaz-minimap", { clear = true }),
     desc = "Toggle 'mini.map' based on filetype",
     callback = vim.schedule_wrap(function()
+      -- Do nothing if entering the minimap buffer itself (when focusing)
+      if vim.bo.filetype == "minimap" then
+        return
+      end
+
+      -- Otherwise we check if the minimap should be opened or not
       if H.minimap_should_be_enabled() then
         MiniMap.open()
       else

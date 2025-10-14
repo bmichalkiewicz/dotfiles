@@ -1,7 +1,7 @@
 MiniDeps.later(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
-    file_types = { "markdown", "md", "codecompanion" },
+    file_types = { "markdown", "md" },
     render_modes = { "n", "no", "c", "t", "i", "ic" },
     checkbox = {
       enable = true,

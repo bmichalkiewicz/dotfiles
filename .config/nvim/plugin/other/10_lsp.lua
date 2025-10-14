@@ -12,20 +12,7 @@ MiniDeps.later(function()
     severity_sort = true,
   })
 
-  -- All language servers are expected to be installed with 'mason.vnim'
-  vim.lsp.enable({
-    "gopls",
-    "lua_ls",
-    "basedpyright",
-    "marksman",
-    "ruff",
-    "harper_ls",
-    "helm_ls",
-    "rust_analyzer",
-    "jsonls",
-    "yamlls",
-    "zls",
-  })
+  vim.lsp.enable(Config.lsp_servers)
 
   vim.lsp.config["*"] = {
     capabilities = {

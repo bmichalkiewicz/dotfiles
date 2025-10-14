@@ -1,2 +1,0 @@
--- I don't use MiniPairs as it doesn't handle Python triple quotes or
--- markdown triple backticks. I prefer nvim_autopairs.

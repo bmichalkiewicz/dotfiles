@@ -28,25 +28,14 @@ MiniDeps.now(function()
       starter.sections.sessions(5, true),
       starter.sections.recent_files(3, false, false),
       {
-        { name = "Mason",         action = "Mason",                 section = "Updaters" },
-        { name = "Update deps",   action = "lua vim.pack.update()", section = "Updaters" },
-        { name = "Visited files", action = "Pick visit_paths",      section = "Actions" },
-        { name = "Quit Neovim",   action = "qall",                  section = "Actions" },
+        { name = "Mason",          action = "Mason",                 section = "Updaters" },
+        { name = "Update plugins", action = "lua vim.pack.update()", section = "Updaters" },
+        { name = "Visited files",  action = "Pick visit_paths",      section = "Actions" },
+        { name = "Quit Neovim",    action = "qall",                  section = "Actions" },
       },
     },
 
     header = function()
-      --       local banner = [[
-      --
-      --                 █           █           █
-      --
-      --  ██████████ ██ ██████ █████  ███ ██ ██████████
-      --  ████████████ ███ ████████ ███ ███ ███ ███ ████████████
-      --  ████ ████ ████ ███ ████ ████ ███  ██████ ███ ████ ████ ████
-      --  ████ ████ ████ ███ ████ ████ ███   ██████ ███ ████ ████ ████
-      --  ████ ████ ██████ ████ ██████ ██████ ██ ████ ████ ████
-      --
-      -- ]]
       local banner = [[
 
                  █              █

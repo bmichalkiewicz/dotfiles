@@ -20,8 +20,6 @@ MiniDeps.later(function()
       yaml       = { "prettierd" },
       lua        = { "stylua" },
       markdown   = { "prettierd" },
-      -- python     = { "isort", "black" },  -- testing ruff instead now
-      sql        = { "sqruff" },
     },
   })
 
