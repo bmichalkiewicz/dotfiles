@@ -29,14 +29,32 @@ vim.o.wildmode       = "longest:full,full"
 vim.o.winborder      = "rounded"
 vim.o.winminwidth    = 5
 
--- Fold settings
-vim.o.foldexpr       = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldlevel      = 99
-vim.o.foldmethod     = "expr"
-vim.o.foldnestmax    = 10
-vim.o.foldtext       = ""
+-- CLipboard
+vim.opt.clipboard    = "unnamedplus"
 
-vim.opt.fillchars    = { fold = "╌", diff = "╱", eob = " " }
-vim.opt.listchars    = { extends = "…", precedes = "…", tab = "  ", nbsp = "␣" }
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  }
+end
+
+-- Fold settings
+vim.o.foldexpr    = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel   = 99
+vim.o.foldmethod  = "expr"
+vim.o.foldnestmax = 10
+vim.o.foldtext    = ""
+
+vim.opt.fillchars = { fold = "╌", diff = "╱", eob = " " }
+vim.opt.listchars = { extends = "…", precedes = "…", tab = "  ", nbsp = "␣" }
 
 --stylua: ignore end
