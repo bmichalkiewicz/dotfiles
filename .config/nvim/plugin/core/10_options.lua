@@ -30,23 +30,21 @@ vim.o.winborder      = "rounded"
 vim.o.winminwidth    = 5
 
 -- CLipboard
-vim.opt.clipboard    = "unnamedplus"
-
-if vim.fn.has("wsl") == 1 then
+vim.o.clipboard      = "unnamedplus"
+if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
-    name = "win32yank-wsl",
+    name = 'WslClipboard',
     copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
     },
     paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
+      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
     },
     cache_enabled = 0,
   }
 end
-
 -- Fold settings
 vim.o.foldexpr    = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevel   = 99
