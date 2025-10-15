@@ -17,7 +17,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "leap.nvim": {
-      "rev": "89b8481",
+      "rev": "aa20426",
       "src": "https://github.com/ggandor/leap.nvim"
     },
     "mason-lspconfig.nvim": {
@@ -28,7 +28,7 @@
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "6a224dd",
+      "rev": "89eecd8",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-autopairs": {
