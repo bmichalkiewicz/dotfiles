@@ -18,7 +18,7 @@ alias trea='eza --all --tree $EZA_PARAMS'
 alias cat='bat --paging never --theme DarkNeon --style plain'
 
 # vim
-alias fim='fzf --multi --bind "enter:become(vim {})"'
+alias fim='fzf --multi --bind "enter:become(nvim {})"'
 
 # git
 alias g='git'
@@ -29,6 +29,8 @@ alias gc='git commit'
 alias gst='git stash'
 alias gsp='git stash pop'
 alias gch='git checkout'
+alias gp='git pull'
+alias gps='git push'
 
 # kubectl
 alias k='kubecolor'
