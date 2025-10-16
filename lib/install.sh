@@ -70,7 +70,7 @@ install_system_packages() {
             ;;
         ubuntu|debian|pop)
             install_packages build-essential procps curl file git unzip zsh fuse \
-                gpg wget lsb-release ca-certificates stow
+                gpg lsb-release ca-certificates stow
             ;;
     esac
 }

@@ -1,11 +1,11 @@
 # 🏠 Dotfiles
 
-A comprehensive development environment setup using GNU Stow for dotfile management with modern tools and configurations for Debian/Ubuntu systems.
+A comprehensive development environment setup using GNU Stow for dotfile management with modern tools and configurations, designed especially for WSL (Windows Subsystem for Linux) on Debian/Ubuntu systems.
 
 ## 🚀 Features
 
 ### 🛠️ Development Tools
-- **Languages & Runtimes**: Go, Rust, Node.js (via Volta), Python (via uv)
+- **Languages & Runtimes**: Go, Node.js (via Volta), Python (via uv)
 - **Version Control**: Git with optimized configuration
 - **Containers**: Docker with docker-compose
 - **Kubernetes**: kubectl, helm, kind, k9s with themes
@@ -21,8 +21,7 @@ A comprehensive development environment setup using GNU Stow for dotfile managem
 - **History**: Enhanced history management
 
 ### 🖥️ Terminal Applications
-- **WezTerm**: Modern GPU-accelerated terminal with Catppuccin theme
-- **Windows Terminal**: Configuration for WSL integration
+- **WezTerm**: Modern GPU-accelerated terminal with Gruvbox theme
 - **VS Code**: Developer-optimized settings
 
 ### ☁️ Cloud & DevOps
@@ -33,9 +32,19 @@ A comprehensive development environment setup using GNU Stow for dotfile managem
 
 ## 📋 Prerequisites
 
-- Debian/Ubuntu-based Linux distribution
+- Debian/Ubuntu-based Linux distribution (WSL recommended)
+- **JetBrains Mono Nerd Font** (required for proper icon display in terminal)
 - Internet connection for downloading packages
 - `sudo` privileges for system package installation
+
+### Font Installation
+
+Install JetBrains Mono Nerd Font from [Nerd Fonts releases](https://github.com/ryanoasis/nerd-fonts/releases):
+
+```bash
+# On WSL, download and install on Windows side, then configure WezTerm to use it
+# Font name: "JetBrains Mono Nerd Font"
+```
 
 ## 🔧 Installation
 
@@ -44,7 +53,7 @@ A comprehensive development environment setup using GNU Stow for dotfile managem
 1. **Install Oh My Zsh** (if not already installed):
 ```bash
 sudo apt update
-sudo apt install -y curl wget git zsh
+sudo apt install -y curl git zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
@@ -94,16 +103,21 @@ dotfiles/
 │   └── install.sh      # Installation functions library
 └── confs/
     ├── wezterm.lua     # WezTerm terminal configuration
-    ├── settings.json   # Windows Terminal settings
     └── vsc.json        # VS Code settings
 ```
 
 ## 🎯 Key Aliases
 
 ### File Operations
-- `ls` → `eza` with icons and colors
+- `ls` → `eza` with icons, colors, and git integration
+- `la` → `eza --all` (show hidden files)
+- `lg` → `eza --git-ignore --all` (respect gitignore)
+- `tree` → `eza --tree` (tree view)
+- `trea` → `eza --all --tree` (tree view with hidden)
 - `cat` → `bat` with syntax highlighting
-- `vim` → `nvim`
+
+### Vim/Editor
+- `fim` → `fzf --multi --bind "enter:become(nvim {})"` (fuzzy find and edit)
 
 ### Git Shortcuts
 - `g` → `git`
@@ -111,15 +125,28 @@ dotfiles/
 - `gc` → `git commit`
 - `gs` → `git status`
 - `gd` → `git diff`
+- `gst` → `git stash`
+- `gsp` → `git stash pop`
+- `gch` → `git checkout`
+- `gp` → `git pull`
+- `gps` → `git push`
+- `lg` → `lazygit`
 
 ### Kubernetes
 - `k` → `kubecolor` (colorized kubectl)
 - `kns` → `kubectl-switch ns` (namespace switcher)
 - `kctx` → `kubectl-switch ctx` (context switcher)
 
-### Convenience
-- `please` → `sudo !!` (run last command with sudo)
-- `fim` → `fzf --multi --bind "enter:become(vim {})"` (fuzzy find and edit)
+### ArgoCD
+- `ac` → `argo-cd`
+
+### Terraform
+- `tf` → `terraform`
+- `tfp` → `terraform plan`
+- `tfa` → `terraform apply`
+
+### WSL Integration
+- `open` → `explorer.exe` (open current directory in Windows Explorer)
 
 ## 🔍 What Gets Installed
 
@@ -130,28 +157,32 @@ dotfiles/
 ### Development Tools
 | Tool | Purpose |
 |------|---------|
-| **eget** | GitHub release downloader |
+| **bin** | GitHub release downloader and binary manager |
 | **task** | Task runner (Taskfile.yml) |
 | **kubectl-switch** | Kubernetes context/namespace switcher |
 | **neovim** | Modern Vim editor |
 | **lazygit** | Terminal UI for git |
 | **lazydocker** | Terminal UI for Docker |
 | **uv** | Fast Python package installer |
-| **gh** | GitHub CLI |
 | **jq/yq** | JSON/YAML processors |
+| **eza** | Modern replacement for ls |
+| **bat** | Cat clone with syntax highlighting |
+| **fzf** | Fuzzy finder |
+| **ripgrep (rg)** | Fast grep alternative |
+| **fd** | Fast find alternative |
+| **zoxide** | Smarter cd command |
 
 ### Language Runtimes
 - **Volta**: Node.js version manager
-- **Rust**: Systems programming language
 - **Go**: Set up in PATH configuration
 - **Python**: Enhanced with uv tool
 
 ## 🎨 Theming
 
-The dotfiles use a consistent **Catppuccin Macchiato** color scheme across:
+The dotfiles use a consistent **Gruvbox** color scheme across:
 - WezTerm terminal
-- Windows Terminal
-- K9s Kubernetes dashboard
+- Superfile file manager
+- Bat syntax highlighting
 - ZSH syntax highlighting
 
 ## 🔧 Customization
@@ -207,8 +238,9 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙏 Acknowledgments
 
 - [Oh My Zsh](https://ohmyz.sh/) for the ZSH framework
-- [Catppuccin](https://catppuccin.com/) for the beautiful color theme
+- [Gruvbox](https://github.com/morhetz/gruvbox) for the beautiful color theme
 - [GNU Stow](https://www.gnu.org/software/stow/) for dotfile management
+- [JetBrains Mono Nerd Font](https://github.com/ryanoasis/nerd-fonts) for excellent terminal typography
 - All the amazing tool creators that make development better
 
 ---
