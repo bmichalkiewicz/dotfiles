@@ -3,6 +3,7 @@ MiniDeps.now(function()
     return string.rep(" ", n) .. str
   end
 
+  -- Function from [echasnovski](https://github.com/echasnovski/nvim).
   local greeting = function()
     local hour = tonumber(vim.fn.strftime("%H"))
     -- [04:00, 12:00) - morning, [12:00, 20:00) - day, [20:00, 04:00) - evening
@@ -28,10 +29,10 @@ MiniDeps.now(function()
       starter.sections.sessions(5, true),
       starter.sections.recent_files(3, false, false),
       {
-        { name = "Mason",          action = "Mason",                 section = "Updaters" },
-        { name = "Update plugins", action = "lua vim.pack.update()", section = "Updaters" },
-        { name = "Visited files",  action = "Pick visit_paths",      section = "Actions" },
-        { name = "Quit Neovim",    action = "qall",                  section = "Actions" },
+        { name = "Mason",          action = "Mason",                 section = "Updaters"},
+        { name = "Update plugins", action = "lua vim.pack.update()", section = "Updaters"},
+        { name = "Visited files",  action = "Pick visit_paths",      section = "Actions"},
+        { name = "Quit Neovim",    action = "qall",                  section = "Actions"},
       },
     },
 
@@ -51,6 +52,7 @@ MiniDeps.now(function()
       return banner .. pad(msg, msg_pad)
     end,
 
-    footer = "Jest malina",
+    -- Fortune slows startup a small amount, but I like it.
+    footer = "Let's go",
   })
 end)

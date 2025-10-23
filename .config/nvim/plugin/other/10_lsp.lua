@@ -1,18 +1,26 @@
 MiniDeps.later(function()
   vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" }, { load = true })
 
-  vim.diagnostic.config({
-    underline = false,
-    update_in_insert = false,
-    -- virtual_text = {
-    --   spacing = 4,
-    --   source = "if_many",
-    --   prefix = "",
-    -- },
-    severity_sort = true,
+  -- All language servers are expected to be installed with 'mason.nvim'
+  vim.lsp.enable({
+    -- DevOps Stack
+    "terraformls",
+    "dockerls",
+    "docker_compose_language_service",
+    "bashls",
+    "ansiblels",
+    "yamlls",
+    "jsonls",
+    -- Programming Languages
+    "gopls",
+    "ruff",
+    "lua_ls",
+    "basedpyright",
+    -- Documentation
+    "marksman",
+    "harper_ls",
+    "helm_ls",
   })
-
-  vim.lsp.enable(Config.lsp_servers)
 
   vim.lsp.config["*"] = {
     capabilities = {

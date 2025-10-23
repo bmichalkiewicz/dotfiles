@@ -12,12 +12,12 @@ now_if_args(function() -- treesitter
   })
 
   vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter",             version = "main" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   }, { load = true })
 
-  local ensure_installed = {
+  local ensure_languages = {
     "bash",
     "css",
     "go",
@@ -35,8 +35,8 @@ now_if_args(function() -- treesitter
     "toml",
     "yaml",
   }
-  require("nvim-treesitter").install(ensure_installed)
-  local filetypes = vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
+  require("nvim-treesitter").install(ensure_languages)
+  local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
   vim.list_extend(filetypes, { "markdown", "pandoc" })
   Config.new_autocmd("FileType", {
     pattern = filetypes,

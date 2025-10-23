@@ -1,7 +1,7 @@
 MiniDeps.later(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
-    file_types = { "markdown", "md" },
+    file_types = { "markdown", "md", "codecompanion" },
     render_modes = { "n", "no", "c", "t", "i", "ic" },
     checkbox = {
       enable = true,
@@ -23,12 +23,12 @@ MiniDeps.later(function()
     heading = {
       width = "block",
       backgrounds = {
-        "MiniStatusLineModeNormal",
-        "MiniStatusLineModeInsert",
-        "MiniStatusLineModeOther",
-        "MiniStatusLineModeReplace",
         "MiniStatusLineModeCommand",
+        "MiniStatusLineModeInsert",
+        "MiniStatusLineModeNormal",
         "MiniStatusLineModeVisual",
+        "MiniStatusLineModeReplace",
+        "MiniStatusLineModeOther",
       },
       sign = false,
       left_pad = 1,
