@@ -14,13 +14,13 @@ vim.opt.completeopt    = "menuone,noselect,fuzzy"
 vim.opt.conceallevel   = 2
 vim.opt.confirm        = true
 vim.opt.expandtab      = true
-vim.opt.fillchars      = { fold="╌", diff="╱", eob=" " }
+vim.opt.fillchars      = { fold = "╌", diff = "╱", eob = " " }
 vim.opt.formatlistpat  = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 vim.opt.formatoptions  = "jcrql1nt"
 vim.opt.grepformat     = "%f:%l:%c:%m"
 vim.opt.grepprg        = "rg --vimgrep"
 vim.opt.list           = true
-vim.opt.listchars      = { extends="…", precedes="…", tab="  ", nbsp="␣" }
+vim.opt.listchars      = { extends = "…", precedes = "…", tab = "  ", nbsp = "␣" }
 vim.opt.pumborder      = "rounded"
 vim.opt.pumheight      = 10
 vim.opt.shiftround     = true
@@ -40,15 +40,41 @@ vim.opt.foldmethod     = "expr"
 vim.opt.foldnestmax    = 10
 vim.opt.foldtext       = ""
 
--- stylua: ignore end
+-- CLipboard
+vim.opt.clipboard      = "unnamedplus"
+if vim.fn.has('wsl') == 1 then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] =
+      'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] =
+      'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
 
 -- Diagnostics
+local icons           = {
+  [vim.diagnostic.severity.ERROR] = " ",
+  [vim.diagnostic.severity.WARN]  = " ",
+  [vim.diagnostic.severity.INFO]  = " ",
+  [vim.diagnostic.severity.HINT]  = " ",
+}
 local diagnostic_opts = {
+  severity_sort = true,
   underline = false,
   update_in_insert = false,
-  virtual_text = { current_line = true, spacing = 3, prefix = "  " },
-  severity_sort = true,
+  virtual_text = {
+    current_line = true,
+    prefix = function(diag) return icons[diag.severity] or " ? " end,
+  },
 }
-MiniDeps.later(function()
-  vim.diagnostic.config(diagnostic_opts)
-end)
+MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
+
+-- stylua: ignore end

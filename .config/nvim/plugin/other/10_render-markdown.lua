@@ -23,12 +23,12 @@ MiniDeps.later(function()
     heading = {
       width = "block",
       backgrounds = {
-        "MiniStatusLineModeCommand",
-        "MiniStatusLineModeInsert",
-        "MiniStatusLineModeNormal",
         "MiniStatusLineModeVisual",
+        "MiniStatusLineModeCommand",
         "MiniStatusLineModeReplace",
+        "MiniStatusLineModeNormal",
         "MiniStatusLineModeOther",
+        "MiniStatusLineModeInsert",
       },
       sign = false,
       left_pad = 1,
