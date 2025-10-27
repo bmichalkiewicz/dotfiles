@@ -77,7 +77,7 @@ MiniDeps.now(function()
     -- stylua: ignore end
   end
 
-  -- vim.cmd.colorscheme("miniwinter")
+  vim.cmd.colorscheme("minihues-slate")
 end)
 
 -- Export current mini.hues palette to a neovim colorscheme file and
