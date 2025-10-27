@@ -10,7 +10,7 @@
 -- ├── 10_options.lua  Built-in Neovim behavior
 -- ├── 20_keymaps.lua  Custom mappings
 -- ├── 30_mini.lua     MINI configuration
--- ├── 40_plugins.lua  Plugins outside of MINI
+-- ├── 40_plugins.lua  Plugins outside of MINI (tree-sitter, LSP, formatters, etc.)
 -- ├ snippets/         User defined snippets (has demo file)
 -- ├ after/            Files to override behavior added by plugins
 -- ├── ftplugin/       Files for filetype behavior (has demo file)
