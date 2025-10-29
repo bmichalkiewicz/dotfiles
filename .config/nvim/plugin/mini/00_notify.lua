@@ -10,6 +10,4 @@
 -- See also:
 -- - `:h MiniNotify.config` for some of common configuration examples.
 
-local now = MiniDeps.now
-
-now(function() require('mini.notify').setup() end)
+MiniDeps.now(function() require('mini.notify').setup() end)

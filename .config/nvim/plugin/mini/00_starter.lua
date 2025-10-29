@@ -12,9 +12,7 @@
 -- - `:h MiniStarter-example-config` - non-default config examples
 -- - `:h MiniStarter-lifecycle` - how to work with Starter buffer
 
-local now = MiniDeps.now
-
-now(function()
+MiniDeps.now(function()
   local pad = function(str, n)
     return string.rep(" ", n) .. str
   end

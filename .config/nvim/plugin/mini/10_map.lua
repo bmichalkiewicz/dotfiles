@@ -14,9 +14,7 @@
 --
 -- NOTE: Might introduce lag on very big buffers (10000+ lines)
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   local map = require('mini.map')
   map.setup({
     -- Use Braille dots to encode text

@@ -26,6 +26,4 @@
 -- - `:h MiniSurround-surrounding-specification` - examples of custom surroundings
 -- - `:h MiniSurround-vim-surround-config` - alternative set of action mappings
 
-local later = MiniDeps.later
-
-later(function() require('mini.surround').setup() end)
+MiniDeps.later(function() require('mini.surround').setup() end)

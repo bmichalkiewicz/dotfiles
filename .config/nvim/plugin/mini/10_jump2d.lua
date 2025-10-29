@@ -13,9 +13,7 @@
 -- See also:
 -- - `:h MiniJump2d.gen_spotter` - list of available spotters
 
-local later = MiniDeps.later
-
-later(function() require('mini.jump2d').setup({
+MiniDeps.later(function() require('mini.jump2d').setup({
   view = { dim = true, n_steps_ahead = 2 },
   mappings = { start_jumping = "m" },
   })

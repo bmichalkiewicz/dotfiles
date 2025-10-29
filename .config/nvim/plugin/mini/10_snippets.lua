@@ -45,9 +45,7 @@
 -- - `:h MiniSnippets-session` - details about snippet session
 -- - `:h MiniSnippets.gen_loader` - list of available loaders
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   -- Define language patterns to work better with 'friendly-snippets'
   local latex_patterns = { 'latex/**/*.json', '**/latex.json' }
   local lang_patterns = {

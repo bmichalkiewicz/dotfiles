@@ -8,6 +8,4 @@
 -- - `<Leader>sr` - read previously started session
 -- - `<Leader>sd` - delete previously started session
 
-local now = MiniDeps.now
-
-now(function() require('mini.sessions').setup() end)
+MiniDeps.now(function() require('mini.sessions').setup() end)

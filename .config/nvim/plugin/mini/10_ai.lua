@@ -19,9 +19,7 @@
 -- - `:h MiniAi-builtin-textobjects` - list of all supported textobjects
 -- - `:h MiniAi-textobject-specification` - examples of custom textobjects
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   local ai = require('mini.ai')
   local extra = require('mini.extra')
   ai.setup({

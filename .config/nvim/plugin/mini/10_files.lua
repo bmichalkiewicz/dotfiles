@@ -32,9 +32,7 @@
 -- - `:h MiniFiles-manipulation` - more details about how to manipulate
 -- - `:h MiniFiles-examples` - examples of common setups
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   -- Enable directory/file preview
   require('mini.files').setup({ windows = { preview = true } })
 

@@ -14,9 +14,7 @@
 -- - `:h MiniKeymap.map_multistep()` - map multi-step action
 -- - `:h MiniKeymap.map_combo()` - map combo
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   require('mini.keymap').setup()
   -- Navigate 'mini.completion' menu with `<Tab>` /  `<S-Tab>`
   MiniKeymap.map_multistep('i', '<Tab>', { 'pmenu_next' })

@@ -10,6 +10,4 @@
 -- Also scroll and resize have some unwanted side effects (see `:h mini.animate`).
 -- Uncomment next line (use `gcc`) to enable.
 
-local later = MiniDeps.later
-
--- later(function() require('mini.animate').setup() end)
+-- MiniDeps.later(function() require('mini.animate').setup() end)

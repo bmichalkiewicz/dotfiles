@@ -6,7 +6,6 @@
 -- a hierarchical structure (called tree) that can be used to implement advanced
 -- and/or more precise actions: syntax highlighting, textobjects, indent, etc.
 
-local add = MiniDeps.add
 local now_if_args = _G.Config.now_if_args
 
 -- Add these plugins now if file (and not 'mini.starter') is shown after startup.

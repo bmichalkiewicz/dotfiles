@@ -14,6 +14,4 @@
 -- - `:h MiniStatusline-example-content` - example of default content. Use it to
 --   configure a custom statusline by setting `config.content.active` function.
 
-local now = MiniDeps.now
-
-now(function() require('mini.statusline').setup() end)
+MiniDeps.now(function() require('mini.statusline').setup() end)

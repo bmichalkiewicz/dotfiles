@@ -19,9 +19,7 @@
 -- - `:h MiniClue.ensure_buf_triggers()` - use it to enable triggers in buffer
 -- - `:h MiniClue.set_mapping_desc()` - change mapping description not from config
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   local miniclue = require('mini.clue')
   -- stylua: ignore
   miniclue.setup({

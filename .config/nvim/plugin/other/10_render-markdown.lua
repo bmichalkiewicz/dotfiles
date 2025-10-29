@@ -3,9 +3,7 @@
 -- └───────────────────┘
 --
 
-local later = MiniDeps.later
-
-later(function()
+MiniDeps.later(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
     file_types = { "markdown", "md" },

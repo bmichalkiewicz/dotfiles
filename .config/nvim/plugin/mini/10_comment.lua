@@ -12,6 +12,4 @@
 -- The built-in `:h commenting` is based on 'mini.comment'. Yet this module is
 -- still enabled as it provides more customization opportunities.
 
-local later = MiniDeps.later
-
-later(function() require('mini.comment').setup() end)
+MiniDeps.later(function() require('mini.comment').setup() end)

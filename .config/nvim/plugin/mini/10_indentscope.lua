@@ -13,6 +13,4 @@
 -- See also:
 -- - `:h MiniIndentscope.gen_animation` - available animation rules
 
-local later = MiniDeps.later
-
-later(function() require('mini.indentscope').setup() end)
+MiniDeps.later(function() require('mini.indentscope').setup() end)

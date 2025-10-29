@@ -15,6 +15,4 @@
 -- - `:h MiniVisits-overview` - overview of how module works
 -- - `:h MiniVisits-examples` - examples of common setups
 
-local later = MiniDeps.later
-
-later(function() require('mini.visits').setup() end)
+MiniDeps.later(function() require('mini.visits').setup() end)

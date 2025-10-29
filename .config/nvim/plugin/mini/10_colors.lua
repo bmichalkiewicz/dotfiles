@@ -15,6 +15,4 @@
 -- It is not enabled by default because it is not really needed on a daily basis.
 -- Uncomment next line (use `gcc`) to enable.
 
-local later = MiniDeps.later
-
--- later(function() require('mini.colors').setup() end)
+-- MiniDeps.later(function() require('mini.colors').setup() end)

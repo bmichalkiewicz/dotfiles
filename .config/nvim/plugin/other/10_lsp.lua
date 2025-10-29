@@ -6,7 +6,6 @@
 -- language specific tools. Neovim's team collects commonly used configurations
 -- for most language servers inside 'neovim/nvim-lspconfig' plugin.
 
-local add = MiniDeps.add
 local now_if_args = _G.Config.now_if_args
 
 -- Add it now if file (and not 'mini.starter') is shown after startup.
