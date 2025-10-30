@@ -39,6 +39,7 @@ now_if_args(function()
     'go',              -- Go
     'python',          -- Python scripts
     'toml',            -- TOML configs
+    'groovy'           -- Jenkinsfiles
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
