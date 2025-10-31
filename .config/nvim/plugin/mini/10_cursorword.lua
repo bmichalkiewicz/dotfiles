@@ -8,4 +8,4 @@
 -- It is not enabled by default because its effects are a matter of taste.
 -- Uncomment next line (use `gcc`) to enable.
 
--- MiniDeps.later(function() require('mini.cursorword').setup() end)
+MiniDeps.later(function() require('mini.cursorword').setup() end)

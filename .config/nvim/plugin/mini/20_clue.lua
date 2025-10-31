@@ -47,6 +47,7 @@ MiniDeps.later(function()
       { mode = 'x', keys = '<Leader>' },
       { mode = 'n', keys = '\\' },       -- mini.basics
       { mode = 'n', keys = '[' },        -- mini.bracketed
+      { mode = 'n', keys = 's' },        -- mini.surround
       { mode = 'n', keys = ']' },
       { mode = 'x', keys = '[' },
       { mode = 'x', keys = ']' },
