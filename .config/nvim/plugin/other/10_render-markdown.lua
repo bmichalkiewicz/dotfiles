@@ -3,15 +3,12 @@
 -- └───────────────────┘
 --
 
-MiniDeps.later(function()
+local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
+now_if_args(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
     file_types = { "markdown", "md" },
     render_modes = { "n", "no", "c", "t", "i", "ic" },
-    checkbox = {
-      enable = true,
-      position = "inline",
-    },
     code = {
       sign = false,
       border = "thin",
@@ -35,7 +32,6 @@ MiniDeps.later(function()
         "MiniStatusLineModeOther",
         "MiniStatusLineModeInsert",
       },
-      sign = false,
       left_pad = 1,
       right_pad = 0,
       position = "right",
