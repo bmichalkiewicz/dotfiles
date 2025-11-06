@@ -1,27 +1,33 @@
--- ┌──────────────┐
--- │ Mini.keymap  │
--- └──────────────┘
---
--- Special key mappings. Provides helpers to map:
--- - Multi-step actions. Apply action 1 if condition is met; else apply
---   action 2 if condition is met; etc.
--- - Combos. Sequence of keys where each acts immediately plus execute extra
---   action if all are typed fast enough. Useful for Insert mode mappings to not
---   introduce delay when typing mapping keys without intention to execute action.
---
--- See also:
--- - `:h MiniKeymap-examples` - examples of common setups
--- - `:h MiniKeymap.map_multistep()` - map multi-step action
--- - `:h MiniKeymap.map_combo()` - map combo
+-- ---------------------------------------------------------------------------
+-- mini.keymap
+-- ---------------------------------------------------------------------------
 
 MiniDeps.later(function()
-  require('mini.keymap').setup()
-  -- Navigate 'mini.completion' menu with `<Tab>` /  `<S-Tab>`
-  MiniKeymap.map_multistep('i', '<Tab>', { 'pmenu_next' })
-  MiniKeymap.map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
-  -- On `<CR>` try to accept current completion item, fall back to accounting
-  -- for pairs from 'mini.pairs'
-  MiniKeymap.map_multistep('i', '<CR>', { 'pmenu_accept', 'minipairs_cr' })
-  -- On `<BS>` just try to account for pairs from 'mini.pairs'
-  MiniKeymap.map_multistep('i', '<BS>', { 'minipairs_bs' })
+  require("mini.keymap").setup()
+
+  -- stylua: ignore start
+  -- I really like "jump_after_close" when used with an auto pair plugin. It
+  -- makes it trivial to skip after the closing quote/bracket/brace/paren.
+  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", "increase_indent", "jump_after_close" })
+  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent", "jump_before_open" })
+  MiniKeymap.map_multistep("i", "<CR>",    { "pmenu_accept",      "minipairs_cr" })
+  MiniKeymap.map_multistep("i", "<BS>",    { "minipairs_bs" })
+  -- stylua: ignore end
+
+  -- Better escape key
+  MiniKeymap.map_combo({ "i", "c", "x", "s" }, "jk", "<BS><BS><Esc>")
+
+  -- Prevent bad habits
+  local notify_many_keys = function(key)
+    local lhs = string.rep(key, 5)
+    local action = function()
+      vim.notify("Too many " .. key)
+    end
+    MiniKeymap.map_combo({ "n", "x" }, lhs, action)
+  end
+
+  notify_many_keys("h")
+  notify_many_keys("j")
+  notify_many_keys("k")
+  notify_many_keys("l")
 end)

@@ -23,6 +23,7 @@ now_if_args(function()
     'yamlls',                          -- YAML
     'jsonls',                          -- JSON
     'gopls',                           -- Go
+    'basedpyright',                    -- Python
     'marksman',                        -- Markdown
     'helm_ls',                         -- Helm
   })
