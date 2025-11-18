@@ -23,6 +23,7 @@ plugins=(
   git
   sudo
   helm
+  terraform
   kubectx
   kubectl
   fzf
