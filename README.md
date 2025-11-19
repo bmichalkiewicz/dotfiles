@@ -9,7 +9,7 @@ My dotfiles designed specifically for WSL
 - **Languages & Runtimes**: Go, Node.js (via Volta), Python (via uv)
 - **Kubernetes**: kubectl/kubecolor, helm, kind, k9s
 - **CLI Tools**: lazygit, lazydocker, task, fzf, eza, bat
-- \*_Terminal_: Oh My Zsh and plugins
+- **Terminal**: Oh My Zsh and plugins
 - **Editor**: Neovim
 
 ### 🎨 Terminal Configuration
