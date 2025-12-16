@@ -9,9 +9,9 @@ export KUBECONFIG_DIR="$HOME/.kube/config.d"
 path=(
   $VOLTA_HOME/bin
   /usr/local/bin
-  $HOME/.local/bin
   /usr/local/go/bin
   $GOPATH/bin
+  $HOME/.distillery/bin
   $path
 )
 export PATH
@@ -21,6 +21,8 @@ autoload -Uz compinit && compinit
 
 plugins=(
   git
+  ansible
+  argocd
   sudo
   helm
   terraform
@@ -33,7 +35,13 @@ plugins=(
   zsh-autosuggestions
   aws
   colored-man-pages
+  zoxide
+  uv
 )
+
+# Zoxide
+ZOXIDE_CMD_OVERRIDE=cd
+
 source $ZSH/oh-my-zsh.sh
 
 # History Configuration
@@ -44,6 +52,7 @@ setopt HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
 HISTSIZE=10000
 SAVEHIST=10000
+
 
 # Aliases
 source "$HOME/aliases.zsh"
@@ -82,7 +91,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Extra tools with error checking
-command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
 command -v kubecolor &> /dev/null && compdef kubecolor=kubectl
 
 # Superfile with directory tracking

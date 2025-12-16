@@ -8,15 +8,12 @@ main() {
     echo " Starting dotfiles installation..."
 
     install_system_packages
-    install_helm
-    install_kubectl
     install_tools
     install_docker
     install_aws_cli
     install_python_tools
     install_volta
     install_claude
-    install_neovim
     setup_zsh
 
     echo " Installation complete!"

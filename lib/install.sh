@@ -3,8 +3,7 @@ set -euo pipefail
 
 # Constants
 GO_VERSION="1.24.6"
-HELM_VERSION="3.18.5"
-LOCAL_BIN="$HOME/.local/bin"
+LOCAL_BIN="$HOME/.distillery/bin"
 
 # OS detection
 detect_os() {
@@ -78,97 +77,52 @@ install_system_packages() {
 install_tools() {
     echo "🔧 Installing CLI tools..."
 
-    # Install bin tool if not already installed
-    if ! command -v bin >/dev/null 2>&1; then
-        echo "📦 Installing bin tool manager..."
-        if curl -L https://github.com/marcosnils/bin/releases/download/v0.23.1/bin_0.23.1_linux_amd64 --output bin; then
-            chmod +x bin
-            if sudo ./bin install github.com/marcosnils/bin /usr/local/bin/bin; then
-	             	sudo chmod +x /usr/local/bin/bin
-                rm -rf ./bin
-                echo "✓ bin tool manager installed successfully"
-            else
-                echo "❌ Failed to install bin tool manager"
-                rm -rf ./bin
-                return 1
-            fi
-        else
-            echo "❌ Failed to download bin tool manager"
-            return 1
-        fi
-    else
-        echo "✓ bin tool manager already installed, skipping..."
+    # Install dist tool
+    if ! check_binary_exists "dist"; then
+      curl --proto '=https' --tlsv1.2 -LsSf https://get.dist.sh | sh
     fi
 
-    # Define tools with their binary names and GitHub repos
-    declare -A tools_map=(
-        ["task"]="go-task/task"
-        ["kubectl-switch"]="mirceanton/kubectl-switch"
-        ["lazygit"]="jesseduffield/lazygit"
-        ["lazydocker"]="jesseduffield/lazydocker"
-        ["gloner"]="bmichalkiewicz/gloner"
-        ["uv"]="astral-sh/uv"
-        ["argocd"]="argoproj/argo-cd"
-        ["shellcheck"]="koalaman/shellcheck"
-        ["tree-sitter"]="tree-sitter/tree-sitter"
-        ["kind"]="kubernetes-sigs/kind"
-        ["eza"]="eza-community/eza"
-        ["jq"]="stedolan/jq"
-        ["yq"]="mikefarah/yq"
-        ["rg"]="BurntSushi/ripgrep"
-        ["fd"]="sharkdp/fd"
-        ["bat"]="sharkdp/bat"
-        ["zoxide"]="ajeetdsouza/zoxide"
-        ["fzf"]="junegunn/fzf"
-        ["kubecolor"]="kubecolor/kubecolor"
-        ["k9s"]="derailed/k9s"
-        ["spf"]="yorukot/superfile"
-        ["pug"]="leg100/pug"
-        ["dyff"]="homeport/dyff"
-        ["envsubst"]="a8m/envsubst"
+    # Define tools with their GitHub repos
+    TOOLS=(
+        "go-task/task"
+        "ekristen/distillery"
+        "mirceanton/kubectl-switch"
+        "jesseduffield/lazygit"
+        "jesseduffield/lazydocker"
+        "bmichalkiewicz/gloner"
+        "--no-checksum-verify astral-sh/uv"
+        "argoproj/argo-cd"
+        "koalaman/shellcheck"
+        "tree-sitter/tree-sitter"
+        "kubernetes-sigs/kind"
+        "eza-community/eza"
+        "stedolan/jq"
+        "mikefarah/yq"
+        "--no-checksum-verify BurntSushi/ripgrep"
+        "sharkdp/fd"
+        "sharkdp/bat"
+        "ajeetdsouza/zoxide"
+        "junegunn/fzf"
+        "kubecolor/kubecolor"
+        "derailed/k9s"
+        "yorukot/superfile"
+        "leg100/pug"
+        "homeport/dyff"
+        "a8m/envsubst"
+        "kubernetes/kubectl"
+        "helm/helm"
+        "--pre neovim/neovim@nightly"
+        "hashicorp/terraform"
+        "hashicorp/packer"
     )
 
-    # Install tools using bin if not already installed
-    for binary_name in "${!tools_map[@]}"; do
-        local repo="${tools_map[$binary_name]}"
-        if ! check_binary_exists "$binary_name" "$repo"; then
-            echo "📦 Installing $binary_name..."
-            if ! bin install "github.com/$repo" ${LOCAL_BIN}; then
-                echo "⚠️ Failed to install $binary_name, continuing with other tools..."
-            fi
-        fi
+    # Install tools using dist if not already installed
+    for repo in "${TOOLS[@]}"; do
+      $HOME/.distillery/bin/dist install $repo
     done
 
-    # Install HashiCorp tools
-    if ! check_binary_exists "terraform"; then
-        echo "📦 Installing terraform..."
-        if ! bin install --provider hashicorp https://releases.hashicorp.com/terraform ${LOCAL_BIN}; then
-            echo "⚠️ Failed to install terraform, continuing..."
-        fi
-    fi
-
-    if ! check_binary_exists "packer"; then
-        echo "📦 Installing packer..."
-        if ! bin install --provider hashicorp https://releases.hashicorp.com/packer ${LOCAL_BIN}; then
-            echo "⚠️  Failed to install packer, continuing..."
-        fi
-    fi
-}
-
-install_helm() {
-    echo "⚓ Installing Helm..."
-    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-}
-
-install_kubectl() {
-    if check_binary_exists "kubectl"; then
-        return 0
-    fi
-
-    echo "☸️  Installing kubectl..."
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    chmod +x kubectl
-    mv kubectl ~/.local/bin/kubectl
+    mv $LOCAL_BIN/nvim--.appimage $LOCAL_BIN/nvim
+    mv $LOCAL_BIN/envsubst-Linux $LOCAL_BIN/envsubst
 }
 
 install_docker() {
@@ -238,14 +192,6 @@ install_claude() {
     echo "🤖 Installing Claude CLI..."
     curl -fsSL claude.ai/install.sh | bash
 }
-
-install_neovim() {
-  if check_binary_exists "nvim"; then
-    return 0
-  fi
-
-  bin install https://github.com/neovim/neovim/releases/tag/nightly ${LOCAL_BIN}/nvim
- }
 
 setup_zsh() {
     echo "🐚 Setting up ZSH..."
