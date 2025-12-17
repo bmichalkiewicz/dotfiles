@@ -12,6 +12,7 @@ path=(
   /usr/local/go/bin
   $GOPATH/bin
   $HOME/.distillery/bin
+  $HOME/.local/bin
   $path
 )
 export PATH
