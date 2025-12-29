@@ -26,5 +26,13 @@ now_if_args(function()
     'basedpyright',                    -- Python
     'marksman',                        -- Markdown
     'helm_ls',                         -- Helm
+    'gitlab_ci_ls'                     -- Gitlab CI/CD
   })
+
+  vim.filetype.add({
+    pattern = {
+      ['%.gitlab%-ci%.ya?ml'] = 'yaml.gitlab',
+    },
+  })
+
 end)
