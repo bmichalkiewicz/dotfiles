@@ -5,7 +5,8 @@
 -- 'mason-org/mason.nvim' (a.k.a. "Mason") is a great tool (package manager) for
 -- installing external language servers, formatters, and linters.
 
-MiniDeps.later(function()
+local now_if_args = _G.Config.now_if_args
+now_if_args(function()
   vim.pack.add({ "https://github.com/mason-org/mason.nvim" }, { load = true })
   vim.pack.add({ "https://github.com/mason-org/mason-lspconfig.nvim" }, { load = true })
 
