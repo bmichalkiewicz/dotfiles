@@ -82,36 +82,8 @@ install_tools() {
       curl --proto '=https' --tlsv1.2 -LsSf https://get.dist.sh | sh
     fi
 
-    # Define tools with their GitHub repos
+    # Define tools
     TOOLS=(
-        "go-task/task"
-        "ekristen/distillery"
-        "mirceanton/kubectl-switch"
-        "jesseduffield/lazygit"
-        "jesseduffield/lazydocker"
-        "bmichalkiewicz/gloner"
-        "--no-checksum-verify astral-sh/uv"
-        "argoproj/argo-cd"
-        "koalaman/shellcheck"
-        "tree-sitter/tree-sitter"
-        "kubernetes-sigs/kind"
-        "eza-community/eza"
-        "stedolan/jq"
-        "mikefarah/yq"
-        "--no-checksum-verify BurntSushi/ripgrep"
-        "sharkdp/fd"
-        "sharkdp/bat"
-        "ajeetdsouza/zoxide"
-        "junegunn/fzf"
-        "kubecolor/kubecolor"
-        "derailed/k9s"
-        "yorukot/superfile"
-        "leg100/pug"
-        "homeport/dyff"
-        "a8m/envsubst"
-        "kubernetes/kubectl"
-        "helm/helm"
-        "--pre neovim/neovim@nightly"
         "hashicorp/terraform"
         "hashicorp/packer"
     )
@@ -120,6 +92,8 @@ install_tools() {
     for repo in "${TOOLS[@]}"; do
       $HOME/.distillery/bin/dist install $repo
     done
+
+    dist run ./distfile
 
     mv $LOCAL_BIN/nvim--.appimage $LOCAL_BIN/nvim
     mv $LOCAL_BIN/envsubst-Linux $LOCAL_BIN/envsubst

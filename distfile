@@ -1,0 +1,28 @@
+install --no-checksum-verify github/BurntSushi/ripgrep
+install github/a8m/envsubst
+install github/ajeetdsouza/zoxide
+install github/alesbrelih/gitlab-ci-ls
+install github/argoproj/argo-cd
+install --no-checksum-verify github/astral-sh/uv
+install github/bmichalkiewicz/gloner
+install github/derailed/k9s
+install github/ekristen/aws-nuke
+install github/ekristen/distillery
+install github/eza-community/eza
+install github/go-task/task
+install github/helm/helm
+install github/homeport/dyff
+install github/jesseduffield/lazydocker
+install github/jesseduffield/lazygit
+install github/junegunn/fzf
+install github/koalaman/shellcheck
+install github/kubecolor/kubecolor
+install github/kubernetes-sigs/kind
+install github/kubernetes/kubectl@1.30.13
+install github/leg100/pug
+install github/mikefarah/yq
+install --pre github/neovim/neovim@nightly
+install github/sharkdp/bat
+install github/sharkdp/fd
+install github/stedolan/jq
+install github/yorukot/superfile
