@@ -8,4 +8,4 @@
 -- - `<Leader>bW` - completely wipeout current buffer even if it has changes
 -- - `<Leader>bd` - delete current buffer (see `:h :bdelete`)
 
-MiniDeps.later(function() require('mini.bufremove').setup() end)
+Config.later(function() require('mini.bufremove').setup() end)

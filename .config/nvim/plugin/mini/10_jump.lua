@@ -8,4 +8,4 @@
 -- - `fxff` - move *f*orward onto next character "x", then next, and next again
 -- - `dt)` - *d*elete *t*ill next closing parenthesis (`)`)
 
-MiniDeps.later(function() require('mini.jump').setup() end)
+Config.later(function() require('mini.jump').setup() end)

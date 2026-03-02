@@ -30,7 +30,7 @@
 -- It also works with snippet candidates provided by LSP server. Best experience
 -- when paired with 'mini.snippets' (which is set up in this file).
 
-MiniDeps.later(function()
+Config.now_if_args(function()
   -- Customize post-processing of LSP responses for a better user experience.
   -- Don't show 'Text' suggestions (usually noisy) and show snippets last.
   local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
@@ -50,10 +50,8 @@ MiniDeps.later(function()
   })
 
   -- Set 'omnifunc' for LSP completion only when needed.
-  local on_attach = function(ev)
-    vim.bo[ev.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
-  end
-  _G.Config.new_autocmd('LspAttach', nil, on_attach, "Set 'omnifunc'")
+  local on_attach = function(ev) vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp" end
+  Config.new_autocmd('LspAttach', nil, on_attach, "Set 'omnifunc'")
 
   -- Advertise to servers that Neovim now supports certain set of completion and
   -- signature features through 'mini.completion'.

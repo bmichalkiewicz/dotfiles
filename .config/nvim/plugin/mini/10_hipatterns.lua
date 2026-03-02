@@ -9,7 +9,7 @@
 -- See also:
 -- - `:h MiniHipatterns-examples` - examples of common setups
 
-MiniDeps.later(function()
+Config.later(function()
   local hipatterns = require('mini.hipatterns')
   local hi_words = MiniExtra.gen_highlighter.words
   hipatterns.setup({

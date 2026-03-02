@@ -15,4 +15,4 @@
 -- - `:h MiniVisits-overview` - overview of how module works
 -- - `:h MiniVisits-examples` - examples of common setups
 
-MiniDeps.later(function() require('mini.visits').setup() end)
+Config.later(function() require('mini.visits').setup() end)

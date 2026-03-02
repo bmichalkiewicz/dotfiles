@@ -9,7 +9,7 @@
 -- Example usage in Visual mode:
 -- - `<M-h>`/`<M-j>`/`<M-k>`/`<M-l>` - move selection left/down/up/right
 
-MiniDeps.later(function() require('mini.move').setup({
+Config.later(function() require('mini.move').setup({
   mappings = {
     left       = '<S-left>',
     right      = '<S-right>',

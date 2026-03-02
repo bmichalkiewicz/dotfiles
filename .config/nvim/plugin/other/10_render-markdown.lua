@@ -3,7 +3,7 @@
 -- └───────────────────┘
 --
 
-local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
+local now_if_args = Config.now_if_args
 now_if_args(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({

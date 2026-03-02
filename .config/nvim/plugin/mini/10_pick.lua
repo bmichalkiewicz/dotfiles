@@ -32,4 +32,4 @@
 --   Execute one either with Lua function, `:Pick <picker-name>` command, or
 --   one of `<Leader>f` mappings defined in 'plugin/20_keymaps.lua'
 
-MiniDeps.later(function() require('mini.pick').setup() end)
+Config.later(function() require('mini.pick').setup() end)

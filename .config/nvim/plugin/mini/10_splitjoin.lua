@@ -13,4 +13,4 @@
 -- See also:
 -- - `:h MiniSplitjoin.gen_hook` - list of available hooks
 
-MiniDeps.later(function() require('mini.splitjoin').setup() end)
+Config.later(function() require('mini.splitjoin').setup() end)

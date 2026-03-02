@@ -14,7 +14,7 @@
 --
 -- NOTE: Might introduce lag on very big buffers (10000+ lines)
 
-local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
+local now_if_args = Config.now_if_args
 now_if_args(function()
   local map = require('mini.map')
   map.setup({

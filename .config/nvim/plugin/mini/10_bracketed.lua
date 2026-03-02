@@ -13,4 +13,4 @@
 -- See also:
 -- - `:h MiniBracketed` - overall mapping design and list of targets
 
-MiniDeps.later(function() require('mini.bracketed').setup() end)
+Config.later(function() require('mini.bracketed').setup() end)

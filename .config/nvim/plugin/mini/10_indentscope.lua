@@ -13,4 +13,4 @@
 -- See also:
 -- - `:h MiniIndentscope.gen_animation` - available animation rules
 
-MiniDeps.later(function() require('mini.indentscope').setup() end)
+Config.later(function() require('mini.indentscope').setup() end)

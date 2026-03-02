@@ -15,4 +15,4 @@
 -- - `:h :Git` - more details about `:Git` user command
 -- - `:h MiniGit.show_at_cursor()` - what information at cursor is shown
 
-MiniDeps.later(function() require('mini.git').setup() end)
+Config.later(function() require('mini.git').setup() end)

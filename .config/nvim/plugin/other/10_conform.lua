@@ -5,7 +5,7 @@
 -- The 'stevearc/conform.nvim' plugin is a good and maintained solution for easier
 -- formatting setup.
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/stevearc/conform.nvim" }, { load = true })
   -- See also:
   -- - `:h Conform`

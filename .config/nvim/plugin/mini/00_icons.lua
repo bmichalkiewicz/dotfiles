@@ -5,7 +5,7 @@
 -- Icon provider. Usually no need to use manually. It is used by plugins like
 -- 'mini.pick', 'mini.files', 'mini.statusline', and others.
 
-MiniDeps.now(function()
+Config.now(function()
   -- Set up to not prefer extension-based icon for some extensions
   local ext3_blocklist = { scm = true, txt = true, yml = true }
   local ext4_blocklist = { json = true, yaml = true }
@@ -17,8 +17,8 @@ MiniDeps.now(function()
 
   -- Mock 'nvim-tree/nvim-web-devicons' for plugins without 'mini.icons' support.
   -- Not needed for 'mini.nvim' or MiniMax, but might be useful for others.
-  MiniDeps.later(MiniIcons.mock_nvim_web_devicons)
+  Config.later(MiniIcons.mock_nvim_web_devicons)
 
   -- Add LSP kind icons. Useful for 'mini.completion'.
-  MiniDeps.later(MiniIcons.tweak_lsp_kind)
+  Config.later(MiniIcons.tweak_lsp_kind)
 end)

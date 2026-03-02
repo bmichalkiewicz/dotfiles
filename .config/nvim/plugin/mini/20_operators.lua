@@ -21,7 +21,7 @@
 -- - `:h MiniOperators-mappings` - overview of how mappings are created
 -- - `:h MiniOperators-overview` - overview of present operators
 
-MiniDeps.later(function()
+Config.later(function()
   require('mini.operators').setup()
 
   -- Create mappings for swapping adjacent arguments. Notes:

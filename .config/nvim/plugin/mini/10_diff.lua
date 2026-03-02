@@ -17,4 +17,4 @@
 -- - `:h MiniDiff-diff-summary` - available summary information
 -- - `:h MiniDiff.gen_source` - available built-in sources
 
-MiniDeps.later(function() require('mini.diff').setup() end)
+Config.later(function() require('mini.diff').setup() end)

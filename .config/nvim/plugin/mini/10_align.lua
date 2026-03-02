@@ -13,4 +13,4 @@
 -- - `:h MiniAlign.gen_step` - list of support step customizations
 -- - `:h MiniAlign-algorithm` - how alignment is done on algorithmic level
 
-MiniDeps.later(function() require('mini.align').setup() end)
+Config.later(function() require('mini.align').setup() end)

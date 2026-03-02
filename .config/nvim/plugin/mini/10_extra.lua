@@ -10,4 +10,4 @@
 -- - `:h MiniExtra.gen_ai_spec` - 'mini.ai' textobject specifications
 -- - `:h MiniExtra.gen_highlighter` - 'mini.hipatterns' highlighters
 
-MiniDeps.later(function() require('mini.extra').setup() end)
+Config.later(function() require('mini.extra').setup() end)

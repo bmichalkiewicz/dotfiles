@@ -32,7 +32,7 @@
 -- - `:h MiniFiles-manipulation` - more details about how to manipulate
 -- - `:h MiniFiles-examples` - examples of common setups
 
-MiniDeps.later(function()
+Config.later(function()
   -- Enable directory/file preview
   require('mini.files').setup({ windows = { preview = true } })
 
@@ -45,5 +45,5 @@ MiniDeps.later(function()
     MiniFiles.set_bookmark('p', minideps_plugins, { desc = 'Plugins' })
     MiniFiles.set_bookmark('w', vim.fn.getcwd, { desc = 'Working directory' })
   end
-  _G.Config.new_autocmd('User', 'MiniFilesExplorerOpen', add_marks, 'Add bookmarks')
+  Config.new_autocmd('User', 'MiniFilesExplorerOpen', add_marks, 'Add bookmarks')
 end)

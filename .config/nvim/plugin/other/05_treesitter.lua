@@ -6,7 +6,7 @@
 -- a hierarchical structure (called tree) that can be used to implement advanced
 -- and/or more precise actions: syntax highlighting, textobjects, indent, etc.
 
-local now_if_args = _G.Config.now_if_args
+local now_if_args = Config.now_if_args
 
 -- Add these plugins now if file (and not 'mini.starter') is shown after startup.
 now_if_args(function()
@@ -55,5 +55,5 @@ now_if_args(function()
     end
   end
   local ts_start = function(ev) vim.treesitter.start(ev.buf) end
-  _G.Config.new_autocmd('FileType', filetypes, ts_start, 'Start tree-sitter')
+  Config.new_autocmd('FileType', filetypes, ts_start, 'Start tree-sitter')
 end)

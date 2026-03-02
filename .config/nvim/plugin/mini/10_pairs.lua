@@ -11,7 +11,7 @@
 -- - `<C-v>(` - always insert a single "(" literally. This is useful since
 --   'mini.pairs' doesn't provide particularly smart behavior, like auto balancing
 
-MiniDeps.later(function()
+Config.later(function()
   -- Create pairs not only in Insert, but also in Command line mode
   require('mini.pairs').setup({ modes = { command = true } })
 end)

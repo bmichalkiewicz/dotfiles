@@ -12,7 +12,7 @@
 --
 -- Uses `now()` for `setup_xxx()` to work when started like `nvim -- path/to/file`
 
-local now_if_args = _G.Config.now_if_args
+local now_if_args = Config.now_if_args
 
 now_if_args(function()
   -- Makes `:h MiniMisc.put()` and `:h MiniMisc.put_text()` public

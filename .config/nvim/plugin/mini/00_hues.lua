@@ -9,7 +9,7 @@
 -- - `:h MiniHues-examples` - how to define highlighting with 'mini.hues'
 
 -- You can try these other 'mini.hues'-based color schemes (uncomment with `gcc`):
--- MiniDeps.now(function() vim.cmd('colorscheme minispring') end)
-MiniDeps.now(function() vim.cmd('colorscheme minisummer') end)
--- MiniDeps.now(function() vim.cmd('colorscheme miniautumn') end)
--- MiniDeps.now(function() vim.cmd('colorscheme miniwinter') end)
+-- Config.now(function() vim.cmd('colorscheme minispring') end)
+Config.now(function() vim.cmd('colorscheme minisummer') end)
+-- Config.now(function() vim.cmd('colorscheme miniautumn') end)
+-- Config.now(function() vim.cmd('colorscheme miniwinter') end)
