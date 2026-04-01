@@ -8,15 +8,19 @@
 -- Here `vim.o.xxx = value` sets default value of option `xxx` to `value`.
 -- See `:h 'xxx'` (replace `xxx` with actual option name).
 --
--- Option values can be customized on per buffer or window basis.
+-- Option values can be customized on a per buffer or window basis.
 -- See 'after/ftplugin/' for common example.
+--
+-- Notes:
+-- - Some options (like `:h 'exrc'`) need to be set before this file is sourced.
+--   Set them directly at the bottom of the 'init.lua' file.
 
 -- stylua: ignore start
 -- The next part (until `-- stylua: ignore end`) is aligned manually for easier
 -- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
 
 -- General ====================================================================
-vim.g.mapleader = ',' -- Use `<Space>` as <Leader> key
+vim.g.mapleader = ' ' -- Use `<Space>` as <Leader> key
 
 vim.o.mouse       = 'a'            -- Enable mouse
 vim.o.mousescroll = 'ver:25,hor:6' -- Customize mouse scroll
@@ -37,7 +41,9 @@ vim.o.cursorline     = true       -- Enable current line highlighting
 vim.o.linebreak      = true       -- Wrap lines at 'breakat' (if 'wrap' is set)
 vim.o.list           = true       -- Show helpful text indicators
 vim.o.number         = true       -- Show line numbers
+vim.o.pumborder      = 'single'   -- Use border in popup menu
 vim.o.pumheight      = 10         -- Make popup menu smaller
+vim.o.pummaxwidth    = 100        -- Make popup menu not too wide
 vim.o.ruler          = false      -- Don't show cursor coordinates
 vim.o.shortmess      = 'CFOSWaco' -- Disable some built-in completion messages
 vim.o.showmode       = false      -- Don't show mode in command line
@@ -82,8 +88,9 @@ vim.o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
 -- Built-in completion
-vim.o.complete    = '.,w,b,kspell'                  -- Use less sources
-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+vim.o.complete        = '.,w,b,kspell'                  -- Use less sources
+vim.o.completeopt     = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+vim.o.completetimeout = 100                             -- Limit sources delay
 
 -- Autocommands ===============================================================
 
