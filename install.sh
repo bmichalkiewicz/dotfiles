@@ -12,8 +12,7 @@ main() {
     install_docker
     install_aws_cli
     install_python_tools
-    install_volta
-    install_claude
+    install_python
     setup_zsh
 
     echo " Installation complete!"

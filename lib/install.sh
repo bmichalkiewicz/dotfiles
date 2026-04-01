@@ -88,6 +88,7 @@ install_tools() {
         "hashicorp/packer"
     )
 
+    set +e
     # Install tools using dist if not already installed
     for repo in "${TOOLS[@]}"; do
       $HOME/.distillery/bin/dist install $repo
@@ -95,8 +96,9 @@ install_tools() {
 
     dist run ./distfile
 
-    mv $LOCAL_BIN/nvim--.appimage $LOCAL_BIN/nvim
     mv $LOCAL_BIN/envsubst-Linux $LOCAL_BIN/envsubst
+    mv $LOCAL_BIN/nvim--.appimage $LOCAL_BIN/nvim
+    set -e
 }
 
 install_docker() {
@@ -158,13 +160,9 @@ install_volta() {
     ~/.volta/bin/volta install node
 }
 
-install_claude() {
-    if check_binary_exists "claude"; then
-        return 0
-    fi
-
-    echo "🤖 Installing Claude CLI..."
-    curl -fsSL claude.ai/install.sh | bash
+install_python() {
+    echo "📦 Installing python..."
+    $LOCAL_BIN/uv python install --default
 }
 
 setup_zsh() {

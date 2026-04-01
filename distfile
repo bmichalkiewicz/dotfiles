@@ -7,7 +7,7 @@ install --no-checksum-verify github/astral-sh/uv
 install github/bmichalkiewicz/gloner
 install github/derailed/k9s
 install github/ekristen/aws-nuke
-install github/ekristen/distillery
+#install github/ekristen/distillery
 install github/eza-community/eza
 install github/go-task/task
 install github/helm/helm
@@ -21,7 +21,7 @@ install github/kubernetes-sigs/kind
 install github/kubernetes/kubectl@1.30.13
 install github/leg100/pug
 install github/mikefarah/yq
-install --pre github/neovim/neovim@nightly
+install github/neovim/neovim
 install github/sharkdp/bat
 install github/sharkdp/fd
 install github/stedolan/jq
