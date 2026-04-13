@@ -82,22 +82,46 @@ install_tools() {
       curl --proto '=https' --tlsv1.2 -LsSf https://get.dist.sh | sh
     fi
 
-    # Define tools
-    TOOLS=(
-        "hashicorp/terraform"
-        "hashicorp/packer"
+    tools=(
+      "--arch=x86_64.appimage github/neovim/neovim"
+      "hashicorp/terraform"
+      "hashicorp/packer"
+      "github/BurntSushi/ripgrep"
+      "github/a8m/envsubst"
+      "github/ajeetdsouza/zoxide"
+      "github/alesbrelih/gitlab-ci-ls"
+      "github/argoproj/argo-cd"
+      "github/astral-sh/uv"
+      "github/bmichalkiewicz/gloner"
+      "github/derailed/k9s"
+      "github/ekristen/aws-nuke"
+      "github/ekristen/distillery"
+      "github/eza-community/eza"
+      "github/go-task/task"
+      "github/helm/helm"
+      "github/homeport/dyff"
+      "github/jesseduffield/lazydocker"
+      "github/jesseduffield/lazygit"
+      "github/junegunn/fzf"
+      "github/koalaman/shellcheck"
+      "github/kubecolor/kubecolor"
+      "github/kubernetes-sigs/kind"
+      "github/kubernetes/kubectl@1.30.13"
+      "github/leg100/pug"
+      "github/mikefarah/yq"
+      "github/sharkdp/bat"
+      "github/sharkdp/fd"
+      "github/stedolan/jq"
+      "github/yorukot/superfile"
     )
 
     set +e
     # Install tools using dist if not already installed
-    for repo in "${TOOLS[@]}"; do
-      $HOME/.distillery/bin/dist install $repo
+    for repo in "${tools[@]}"; do
+      "$LOCAL_BIN/dist" install ${repo}
     done
 
-    dist run ./distfile
-
-    mv $LOCAL_BIN/envsubst-Linux $LOCAL_BIN/envsubst
-    mv $LOCAL_BIN/nvim--.appimage $LOCAL_BIN/nvim
+    mv "$LOCAL_BIN/envsubst-Linux" "$LOCAL_BIN/envsubst"
     set -e
 }
 
@@ -148,7 +172,7 @@ install_python_tools() {
     echo "🐍 Installing Python tools..."
 
     echo "📦 Installing ansible..."
-    $LOCAL_BIN/uv tool install ansible-core --with ansible
+    $LOCAL_BIN/uv tool install --system-certs ansible-core --with ansible
 
     echo "📦 Installing gita..."
     $LOCAL_BIN/uv tool install gita

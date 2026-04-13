@@ -13,7 +13,7 @@ now_if_args(function()
   require('mason').setup()
   require("mason-lspconfig").setup({
     ensure_installed = {
-      "terraformls",                     -- Terraform
+      -- "terraformls",                     -- Terraform
       "dockerls",                        -- Dockerfile
       "docker_compose_language_service", -- Docker Compose
       "bashls",                          -- Bash

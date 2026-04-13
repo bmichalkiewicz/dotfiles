@@ -79,7 +79,6 @@ _load_completion() {
 }
 
 # CLI completions with error checking
-_load_completion devbox "devbox completion zsh"
 _load_completion docker "docker completion zsh"
 _load_completion kubectl "kubectl completion zsh"
 _load_completion kubectl-switch "kubectl-switch completion zsh"
