@@ -172,7 +172,7 @@ install_python_tools() {
     echo "🐍 Installing Python tools..."
 
     echo "📦 Installing ansible..."
-    $LOCAL_BIN/uv tool install --system-certs ansible-core --with ansible
+    $LOCAL_BIN/uv tool install --system-certs ansible-core --with ansible --with kubernetes
 
     echo "📦 Installing gita..."
     $LOCAL_BIN/uv tool install gita
