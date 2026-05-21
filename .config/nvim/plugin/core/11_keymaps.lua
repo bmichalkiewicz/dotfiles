@@ -16,9 +16,15 @@ end
 
 -- Paste linewise before/after current line
 -- Usage: `yiw` to yank a word and `]p` to put it on the next line.
-nmap('[p', '<Cmd>exe "iput! " . v:register<CR>', 'Paste Above')
-nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', 'Paste Below')
-nmap('sj', '<Plug>(leap)',                      'Jump everywhere')
+nmap('[p', '<Cmd>exe "iput! " . v:register<CR>',                 'Paste Above')
+nmap(']p', '<Cmd>exe "iput "  . v:register<CR>',                 'Paste Below')
+nmap('sj', '<Plug>(leap)',                                       'Jump everywhere')
+nmap('<C-Tab>', '<Cmd>lua MiniBracketed.buffer("backward")<CR>', 'Next tab')
+nmap('<C-h>',   '<Cmd>lua MiniBracketed.buffer("backward")<CR>', 'Previous tab')
+nmap('<C-l>',   '<Cmd>lua MiniBracketed.buffer("forward")<CR>',  'Next tab')
+nmap([[\\f]], '<Cmd>lua Config.conform_toggle()<CR>',            'Toggle auto-format')
+nmap([[\\H]], '<Cmd>lua Config.toggle_hints()<CR>',              'Toggle inlay hints')
+nmap([[\\W]], '<Cmd>lua Config.minicursorword_toggle()<CR>',     'Toggle cursor word')
 -- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
 
 -- stylua: ignore start

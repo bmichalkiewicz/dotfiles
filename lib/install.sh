@@ -98,6 +98,7 @@ install_tools() {
       "github/ekristen/distillery"
       "github/eza-community/eza"
       "github/go-task/task"
+      "github/dundee/gdu"
       "github/helm/helm"
       "github/homeport/dyff"
       "github/jesseduffield/lazydocker"
@@ -108,6 +109,7 @@ install_tools() {
       "github/kubernetes-sigs/kind"
       "github/kubernetes/kubectl@1.30.13"
       "github/leg100/pug"
+      "tree-sitter/tree-sitter"
       "github/mikefarah/yq"
       "github/sharkdp/bat"
       "github/sharkdp/fd"
@@ -156,6 +158,12 @@ install_docker() {
     esac
 }
 
+install_volta() {
+    echo "⚡ Installing Volta..."
+    curl https://get.volta.sh | bash
+    ~/.volta/bin/volta install node
+}
+
 install_aws_cli() {
     if check_binary_exists "aws"; then
         return 0
@@ -175,7 +183,10 @@ install_python_tools() {
     $LOCAL_BIN/uv tool install --system-certs ansible-core --with ansible --with kubernetes
 
     echo "📦 Installing gita..."
-    $LOCAL_BIN/uv tool install gita
+    $LOCAL_BIN/uv tool install --system-certs gita
+
+    echo "📦 Installing basedpython.."
+    $LOCAL_BIN/uv tool install --system-certs basedpyright
 }
 
 install_volta() {

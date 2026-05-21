@@ -18,7 +18,7 @@ alias trea='eza --all --tree $EZA_PARAMS'
 alias cat='bat --paging never --theme DarkNeon --style plain'
 
 # vim
-alias fim='fzf --multi --bind "enter:become(nvim {})"'
+alias fim='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}" --multi --bind "enter:become(nvim {})"'
 
 # git
 alias g='git'

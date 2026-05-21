@@ -13,6 +13,7 @@ main() {
     install_aws_cli
     install_python_tools
     install_python
+    install_volta
     setup_zsh
 
     echo " Installation complete!"
